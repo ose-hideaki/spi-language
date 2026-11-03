@@ -1748,5 +1748,245 @@ window.SEED_QUESTIONS = [
     "contentLicense": "CC BY-SA 4.0",
     "dictionaryTitle": "薫陶",
     "reviewed": true
+  },
+  {
+    "id": "word-1793748082540-fu3xx",
+    "category": "語句の意味",
+    "question": "「器量」の意味として最も適切なものを選んでください。",
+    "choices": [
+      "ある物事だけに心を奪われ、周囲が見えなくなること",
+      "対立する意見の間を取り持ち、調整すること",
+      "物事の全体を広い視点から捉えること",
+      "才能や力量のこと。",
+      "複数のものを比べ、共通点と相違点を調べること"
+    ],
+    "answer": 3,
+    "explanation": "「器量」は「才能や力量のこと。」という意味です。",
+    "origin": "ja-wiktionary",
+    "sourceUrl": "https://ja.wiktionary.org/wiki/%E5%99%A8%E9%87%8F",
+    "sourceLabel": "日本語Wiktionary",
+    "contentLicense": "CC BY-SA 4.0",
+    "dictionaryTitle": "器量",
+    "reviewed": true
+  },
+  {
+    "id": "word-1793748102419-74irk",
+    "category": "語句の意味",
+    "question": "「鷹揚」の意味として最も適切なものを選んでください。",
+    "choices": [
+      "決められた役割や責任を最後まで果たすこと",
+      "ゆったりしていて小事にこだわらないこと。おっとりしていること。",
+      "前例や慣習を重んじ、それに従うこと",
+      "相手の事情を考え、判断や行動を控えめにすること",
+      "物事の一部分だけを取り上げて判断すること"
+    ],
+    "answer": 1,
+    "explanation": "「鷹揚」は「ゆったりしていて小事にこだわらないこと。おっとりしていること。」という意味です。",
+    "origin": "ja-wiktionary",
+    "sourceUrl": "https://ja.wiktionary.org/wiki/%E9%B7%B9%E6%8F%9A",
+    "sourceLabel": "日本語Wiktionary",
+    "contentLicense": "CC BY-SA 4.0",
+    "dictionaryTitle": "鷹揚",
+    "reviewed": true
+  },
+  {
+    "id": "word-1793748209310-tem76",
+    "category": "語句の意味",
+    "question": "「訥弁」の意味として最も適切なものを選んでください。",
+    "choices": [
+      "話し方が滑らかでないこと。また、そのようなさま。",
+      "根拠が十分でないまま推測して決めること",
+      "失敗を恐れず、新しいことに取り組むこと",
+      "物事の全体を広い視点から捉えること",
+      "以前の状態を改め、よりよい形に変えること"
+    ],
+    "answer": 0,
+    "explanation": "「訥弁」は「話し方が滑らかでないこと。また、そのようなさま。」という意味です。",
+    "origin": "ja-wiktionary",
+    "sourceUrl": "https://ja.wiktionary.org/wiki/%E8%A8%A5%E5%BC%81",
+    "sourceLabel": "日本語Wiktionary",
+    "contentLicense": "CC BY-SA 4.0",
+    "dictionaryTitle": "訥弁",
+    "reviewed": true
+  },
+  {
+    "id": "word-1793748278811-sd803",
+    "category": "語句の意味",
+    "question": "「弄舌」の意味として最も適切なものを選んでください。",
+    "choices": [
+      "むやみにしゃべることや饒舌や多言のこと。",
+      "相手の事情を考え、判断や行動を控えめにすること",
+      "必要以上に遠慮し、自分の意見を控えること",
+      "対立する意見の間を取り持ち、調整すること",
+      "すでに決まった事柄を、改めて確認すること"
+    ],
+    "answer": 0,
+    "explanation": "「弄舌」は「むやみにしゃべることや饒舌や多言のこと。」という意味です。",
+    "origin": "ja-wiktionary",
+    "sourceUrl": "https://ja.wiktionary.org/wiki/%E5%BC%84%E8%88%8C",
+    "sourceLabel": "日本語Wiktionary",
+    "contentLicense": "CC BY-SA 4.0",
+    "dictionaryTitle": "弄舌",
+    "reviewed": true
+  },
+  {
+    "id": "word-1793748322481-a6p32",
+    "category": "語句の意味",
+    "question": "「箝口」の意味として最も適切なものを選んでください。",
+    "choices": [
+      "自分の考えを曲げず、最後まで押し通すこと",
+      "口をつぐんでものを言わないこと。",
+      "ある物事だけに心を奪われ、周囲が見えなくなること",
+      "物事の全体を広い視点から捉えること",
+      "状況に応じて素早く考えや行動を変えること"
+    ],
+    "answer": 1,
+    "explanation": "「箝口」は「口をつぐんでものを言わないこと。」という意味です。",
+    "origin": "ja-wiktionary",
+    "sourceUrl": "https://ja.wiktionary.org/wiki/%E7%AE%9D%E5%8F%A3",
+    "sourceLabel": "日本語Wiktionary",
+    "contentLicense": "CC BY-SA 4.0",
+    "dictionaryTitle": "箝口",
+    "reviewed": true
+  },
+  {
+    "id": "word-1793748367540-iqldl",
+    "category": "語句の意味",
+    "question": "「苦肉」の意味として最も適切なものを選んでください。",
+    "choices": [
+      "表面には現れず、内側に隠れて存在すること",
+      "前例や慣習を重んじ、それに従うこと",
+      "敵を欺くために、故意に自らを傷つけるなど犠牲を払うこと。",
+      "状況に応じて素早く考えや行動を変えること",
+      "ある物事だけに心を奪われ、周囲が見えなくなること"
+    ],
+    "answer": 2,
+    "explanation": "「苦肉」は「敵を欺くために、故意に自らを傷つけるなど犠牲を払うこと。」という意味です。",
+    "origin": "ja-wiktionary",
+    "sourceUrl": "https://ja.wiktionary.org/wiki/%E8%8B%A6%E8%82%89",
+    "sourceLabel": "日本語Wiktionary",
+    "contentLicense": "CC BY-SA 4.0",
+    "dictionaryTitle": "苦肉",
+    "reviewed": true
+  },
+  {
+    "id": "word-1793748432232-prd17",
+    "category": "語句の意味",
+    "question": "「識見」の意味として最も適切なものを選んでください。",
+    "choices": [
+      "すでに決まった事柄を、改めて確認すること",
+      "複数のものを比べ、共通点と相違点を調べること",
+      "事実を順序立てて、分かりやすく説明すること",
+      "ある物事だけに心を奪われ、周囲が見えなくなること",
+      "事物を正しく見分ける能力。見識。"
+    ],
+    "answer": 4,
+    "explanation": "「識見」は「事物を正しく見分ける能力。見識。」という意味です。",
+    "origin": "ja-wiktionary",
+    "sourceUrl": "https://ja.wiktionary.org/wiki/%E8%AD%98%E8%A6%8B",
+    "sourceLabel": "日本語Wiktionary",
+    "contentLicense": "CC BY-SA 4.0",
+    "dictionaryTitle": "識見",
+    "reviewed": true
+  },
+  {
+    "id": "word-1793748445084-klw73",
+    "category": "語句の意味",
+    "question": "「識別」の意味として最も適切なものを選んでください。",
+    "choices": [
+      "似ている物事の種類や性質などを見分けること。",
+      "問題の原因をさかのぼって詳しく調べること",
+      "物事の一部分だけを取り上げて判断すること",
+      "失敗を恐れず、新しいことに取り組むこと",
+      "事実を順序立てて、分かりやすく説明すること"
+    ],
+    "answer": 0,
+    "explanation": "「識別」は「似ている物事の種類や性質などを見分けること。」という意味です。",
+    "origin": "ja-wiktionary",
+    "sourceUrl": "https://ja.wiktionary.org/wiki/%E8%AD%98%E5%88%A5",
+    "sourceLabel": "日本語Wiktionary",
+    "contentLicense": "CC BY-SA 4.0",
+    "dictionaryTitle": "識別",
+    "reviewed": true
+  },
+  {
+    "id": "word-1793748629693-5h2k4",
+    "category": "語句の意味",
+    "question": "「勘案」の意味として最も適切なものを選んでください。",
+    "choices": [
+      "決められた役割や責任を最後まで果たすこと",
+      "あれこれ考え合わせること。",
+      "物事の一部分だけを取り上げて判断すること",
+      "状況に応じて素早く考えや行動を変えること",
+      "ある物事だけに心を奪われ、周囲が見えなくなること"
+    ],
+    "answer": 1,
+    "explanation": "「勘案」は「あれこれ考え合わせること。」という意味です。",
+    "origin": "ja-wiktionary",
+    "sourceUrl": "https://ja.wiktionary.org/wiki/%E5%8B%98%E6%A1%88",
+    "sourceLabel": "日本語Wiktionary",
+    "contentLicense": "CC BY-SA 4.0",
+    "dictionaryTitle": "勘案",
+    "reviewed": true
+  },
+  {
+    "id": "word-1793748640957-zzlbo",
+    "category": "語句の意味",
+    "question": "「腹案」の意味として最も適切なものを選んでください。",
+    "choices": [
+      "ある物事だけに心を奪われ、周囲が見えなくなること",
+      "物事の一部分だけを取り上げて判断すること",
+      "失敗を恐れず、新しいことに取り組むこと",
+      "心の中で考えている計画。",
+      "表面には現れず、内側に隠れて存在すること"
+    ],
+    "answer": 3,
+    "explanation": "「腹案」は「心の中で考えている計画。」という意味です。",
+    "origin": "ja-wiktionary",
+    "sourceUrl": "https://ja.wiktionary.org/wiki/%E8%85%B9%E6%A1%88",
+    "sourceLabel": "日本語Wiktionary",
+    "contentLicense": "CC BY-SA 4.0",
+    "dictionaryTitle": "腹案",
+    "reviewed": true
+  },
+  {
+    "id": "word-1793748672145-kmkmw",
+    "category": "語句の意味",
+    "question": "「懸案」の意味として最も適切なものを選んでください。",
+    "choices": [
+      "表面には現れず、内側に隠れて存在すること",
+      "以前の状態を改め、よりよい形に変えること",
+      "根拠が十分でないまま推測して決めること",
+      "問題の原因をさかのぼって詳しく調べること",
+      "解決しなければならない案件がそのまま未解決となっていること。"
+    ],
+    "answer": 4,
+    "explanation": "「懸案」は「解決しなければならない案件がそのまま未解決となっていること。」という意味です。",
+    "origin": "ja-wiktionary",
+    "sourceUrl": "https://ja.wiktionary.org/wiki/%E6%87%B8%E6%A1%88",
+    "sourceLabel": "日本語Wiktionary",
+    "contentLicense": "CC BY-SA 4.0",
+    "dictionaryTitle": "懸案",
+    "reviewed": true
+  },
+  {
+    "id": "word-1793748804051-y43es",
+    "category": "語句の意味",
+    "question": "「活路」の意味として最も適切なものを選んでください。",
+    "choices": [
+      "窮地から脱出する方法や助かる道のこと。",
+      "複数のものを比べ、共通点と相違点を調べること",
+      "表面には現れず、内側に隠れて存在すること",
+      "相手の事情を考え、判断や行動を控えめにすること",
+      "根拠が十分でないまま推測して決めること"
+    ],
+    "answer": 0,
+    "explanation": "「活路」は「窮地から脱出する方法や助かる道のこと。」という意味です。",
+    "origin": "ja-wiktionary",
+    "sourceUrl": "https://ja.wiktionary.org/wiki/%E6%B4%BB%E8%B7%AF",
+    "sourceLabel": "日本語Wiktionary",
+    "contentLicense": "CC BY-SA 4.0",
+    "dictionaryTitle": "活路",
+    "reviewed": true
   }
 ];
