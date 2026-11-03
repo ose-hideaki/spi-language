@@ -22,6 +22,12 @@ def validate(data):
             raise ValueError(f'{q["id"]}: 異なる5つの選択肢が必要です')
         if type(q.get('answer')) is not int or not 0 <= q['answer'] < 5:
             raise ValueError(f'{q["id"]}: answerは0〜4の整数です')
+        if 'headword' in q and (not isinstance(q['headword'], str) or not q['headword'].strip() or len(q['headword']) > 100):
+            raise ValueError(f'{q["id"]}: headwordは100文字以下の文字列です')
+        if 'reading' in q and (not isinstance(q['reading'], str) or len(q['reading']) > 200):
+            raise ValueError(f'{q["id"]}: readingは200文字以下の文字列です')
+        if 'choiceReadings' in q and (not isinstance(q['choiceReadings'], list) or len(q['choiceReadings']) != 5 or not all(isinstance(r, str) and len(r) <= 200 for r in q['choiceReadings'])):
+            raise ValueError(f'{q["id"]}: choiceReadingsは5個の読みの配列です')
         if not isinstance(q.get('passage', ''), str) or len(q.get('passage', '')) > 20000:
             raise ValueError('passageは20000文字以下の文字列です')
     return data

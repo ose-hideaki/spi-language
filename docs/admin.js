@@ -51,6 +51,7 @@ function validateQuestion(question) {
   if (!question || typeof question.id !== 'string' || typeof question.question !== 'string') throw Error('問題データが不正です。');
   if (!Array.isArray(question.choices) || question.choices.length !== 5 || new Set(question.choices).size !== 5) throw Error('異なる5個の選択肢が必要です。');
   if (!Number.isInteger(question.answer) || question.answer < 0 || question.answer > 4) throw Error('正解の位置が不正です。');
+  if (question.reading !== undefined && (typeof question.reading !== 'string' || question.reading.length > 200)) throw Error('ふりがなのデータが不正です。');
 }
 
 async function updateAuthView() {
@@ -181,6 +182,18 @@ function extractDefinitions(wikitext, headword) {
     });
 }
 
+function extractReading(wikitext) {
+  const match = wikitext.match(/\{\{kana-DEFAULTSORT\|([^{}|]+)(?:\|[^{}]*)?\}\}/) || wikitext.match(/\{\{ja-pron\|([^{}|]+)(?:\|[^{}]*)?\}\}/);
+  if (!match) return '';
+  const reading = match[1].replace(/\[\[(?:[^\]|]+\|)?([^\]]+)\]\]/g, '$1').trim();
+  return /^[ぁ-ゖァ-ヺー・\s]+$/u.test(reading) ? reading : '';
+}
+
+function readingForPhrase(phrase, dictionaryTitle, baseReading) {
+  if (!baseReading) return '';
+  return phrase.startsWith(dictionaryTitle) ? baseReading + phrase.slice(dictionaryTitle.length) : baseReading;
+}
+
 async function fetchEntry(phrase) {
   const endings = ['である', 'だった', 'でした', 'される', 'させる', 'している', 'して', 'した', 'する', 'な', 'に', 'の', 'だ'];
   const candidates = [...new Set([phrase, ...endings.filter(x => phrase.endsWith(x) && phrase.length > x.length).map(x => phrase.slice(0, -x.length))])];
@@ -192,7 +205,7 @@ async function fetchEntry(phrase) {
     if (!data.parse?.wikitext) continue;
     const title = data.parse.title || candidate;
     const definitions = extractDefinitions(data.parse.wikitext, title);
-    if (definitions.length) return { title, definitions, sourceUrl: `https://ja.wiktionary.org/wiki/${encodeURIComponent(title)}` };
+    if (definitions.length) return { title, definitions, reading: readingForPhrase(phrase, title, extractReading(data.parse.wikitext)), sourceUrl: `https://ja.wiktionary.org/wiki/${encodeURIComponent(title)}` };
   }
   throw Error('辞書で見つかりませんでした。基本形で入力すると見つかる場合があります。');
 }
@@ -207,6 +220,7 @@ function meaningForQuestion(word, definition) {
 
 function buildDraft(word, definition, correctIndex = Math.floor(Math.random() * 5)) {
   const answer = meaningForQuestion(word, definition);
+  const reading = draft?.headword === word ? draft.reading : lookupEntry.reading;
   const wrong = shuffled(DISTRACTORS.map(x => meaningForQuestion(word, x)).filter(x => x !== answer)).slice(0, 4);
   const choices = [...wrong];
   choices.splice(correctIndex, 0, answer);
@@ -214,6 +228,8 @@ function buildDraft(word, definition, correctIndex = Math.floor(Math.random() * 
     id: `word-${Date.now()}-${Math.random().toString(36).slice(2, 7)}`,
     category: '語句の意味',
     question: `「${word}」の意味として最も適切なものを選んでください。`,
+    headword: word,
+    reading,
     choices,
     answer: correctIndex,
     explanation: `「${word}」は「${answer}」という意味です。`,
@@ -221,6 +237,8 @@ function buildDraft(word, definition, correctIndex = Math.floor(Math.random() * 
     contentLicense: 'CC BY-SA 4.0', dictionaryTitle: lookupEntry.title, reviewed: true,
     submissionId: activeSubmissionId
   };
+  $('reading-input').value = reading;
+  $('reading-input').required = /\p{Script=Han}/u.test(word);
   $('preview-question').textContent = draft.question;
   $('preview-choices').replaceChildren(...choices.map(choice => { const li = document.createElement('li'); li.textContent = choice; return li; }));
   $('preview-answer').textContent = `正解：${String.fromCharCode(65 + correctIndex)}. ${answer}`;
@@ -258,6 +276,7 @@ async function lookupWordDraft() {
 
 function queueDraft() {
   try {
+    if (/\p{Script=Han}/u.test(draft?.headword || '') && !draft?.reading) throw Error('漢字の語句にはふりがなを入力してください。');
     validateQuestion(draft);
     if (state.pending.some(item => item.question === draft.question)) throw Error('同じ問題がリストにあります。');
     if (state.pending.length >= 20) throw Error('一度に登録できるのは20問までです。');
@@ -368,6 +387,7 @@ $('reload-submissions').onclick = loadSubmissions;
 $('word-form').onsubmit = event => { event.preventDefault(); activeSubmissionId = activeSubmissionId || null; lookupWordDraft(); };
 $('word-input').addEventListener('input', () => { if (!submissions.some(item => item.id === activeSubmissionId && item.word === $('word-input').value.trim())) activeSubmissionId = null; });
 $('definition-select').onchange = () => chooseDefinition(Number($('definition-select').value), draft?.answer);
+$('reading-input').oninput = () => { if (draft) draft.reading = $('reading-input').value.trim(); };
 $('regenerate-word-question').onclick = () => { if (draft) chooseDefinition(Number($('definition-select').value), draft.answer); };
 $('queue-word-question').onclick = queueDraft;
 $('publish-all-questions').onclick = publishPending;

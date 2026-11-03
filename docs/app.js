@@ -34,6 +34,9 @@ function validate(data){
   if(ids.has(q.id))throw Error('問題IDが重複しています。');ids.add(q.id);
   if(!Array.isArray(q.choices)||q.choices.length!==5||!q.choices.every(c=>typeof c==='string'&&c.trim()&&c.length<3000)||new Set(q.choices).size!==5)throw Error('異なる5個の選択肢が必要です。');
   if(!Number.isInteger(q.answer)||q.answer<0||q.answer>4)throw Error('answerは0〜4の整数にしてください。');
+  if(q.headword!==undefined&&(typeof q.headword!=='string'||!q.headword.trim()||q.headword.length>100))throw Error('headwordは100文字以下の文字列にしてください。');
+  if(q.reading!==undefined&&(typeof q.reading!=='string'||q.reading.length>200))throw Error('readingは200文字以下の文字列にしてください。');
+  if(q.choiceReadings!==undefined&&(!Array.isArray(q.choiceReadings)||q.choiceReadings.length!==5||!q.choiceReadings.every(r=>typeof r==='string'&&r.length<=200)))throw Error('choiceReadingsは5個の読みの配列にしてください。');
   if(q.passage!==undefined&&(typeof q.passage!=='string'||q.passage.length>20000))throw Error('passageは20000文字以下の文字列にしてください。');
  }
  return data;
@@ -44,11 +47,19 @@ function all(){return [...window.SEED_QUESTIONS,...state.custom];}
 function practiceQuestions(){return all().filter(q=>q.category==='語句の意味');}
 function home(){clearInterval(timer);$('home').hidden=false;$('practice').hidden=true;$('result').hidden=true;const data=practiceQuestions(),ids=new Set(data.map(q=>q.id)),history=state.history.filter(h=>ids.has(h.id));$('total').textContent=data.length;$('done').textContent=history.length;$('rate').textContent=history.length?Math.round(history.filter(h=>h.correct).length/history.length*100)+'%':'—';if($('publish-list'))renderPublishQueue();}
 function shuffled(a){a=[...a];for(let i=a.length-1;i>0;i--){let j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
-function shuffledWrongChoices(question){
- if(question.category!=='語句の意味')return [...question.choices];
- const wrong=shuffled(question.choices.filter((_,i)=>i!==question.answer));
+function shuffledChoiceEntries(question){
+ const entries=question.choices.map((text,i)=>({text,reading:question.choiceReadings?.[i]||''}));
+ if(question.category!=='語句の意味')return entries;
+ const wrong=shuffled(entries.filter((_,i)=>i!==question.answer));
  let wrongIndex=0;
- return question.choices.map((choice,i)=>i===question.answer?choice:wrong[wrongIndex++]);
+ return entries.map((choice,i)=>i===question.answer?choice:wrong[wrongIndex++]);
+}
+function appendRuby(container,text,headword,reading){
+ container.replaceChildren();
+ if(!headword||!reading||!text.includes(headword)){container.textContent=text;return;}
+ const index=text.indexOf(headword),ruby=document.createElement('ruby'),rt=document.createElement('rt');
+ ruby.append(document.createTextNode(headword));rt.textContent=reading;ruby.append(rt);
+ container.append(document.createTextNode(text.slice(0,index)),ruby,document.createTextNode(text.slice(index+headword.length)));
 }
 function cleanWikiMarkup(text){
  text=text
@@ -74,6 +85,16 @@ function extractJapaneseDefinitions(wikitext,headword){
  const scoped=lines.slice(start+1,end<0?lines.length:end);
  return scoped.filter(line=>/^#(?![#*:])/.test(line)).map(line=>cleanWikiMarkup(line.slice(1))).filter(definition=>isUsableDefinition(definition,headword));
 }
+function extractJapaneseReading(wikitext){
+ const match=wikitext.match(/\{\{kana-DEFAULTSORT\|([^{}|]+)(?:\|[^{}]*)?\}\}/)||wikitext.match(/\{\{ja-pron\|([^{}|]+)(?:\|[^{}]*)?\}\}/);
+ if(!match)return '';
+ const reading=match[1].replace(/\[\[(?:[^\]|]+\|)?([^\]]+)\]\]/g,'$1').trim();
+ return /^[ぁ-ゖァ-ヺー・\s]+$/u.test(reading)?reading:'';
+}
+function readingForPhrase(phrase,dictionaryTitle,baseReading){
+ if(!baseReading)return '';
+ return phrase.startsWith(dictionaryTitle)?baseReading+phrase.slice(dictionaryTitle.length):baseReading;
+}
 function wiktionaryCandidates(phrase){
  const candidates=[phrase];
  const endings=['である','だった','でした','される','させる','している','して','した','する','な','に','の','だ'];
@@ -91,7 +112,8 @@ async function fetchWiktionaryEntry(phrase){
   if(data.error||!data.parse?.wikitext)continue;
   const definitions=extractJapaneseDefinitions(data.parse.wikitext,data.parse.title||candidate);
   if(!definitions.length)continue;
-  return {definitions,title:data.parse.title||candidate,sourceUrl:`https://ja.wiktionary.org/wiki/${encodeURIComponent(data.parse.title||candidate)}`};
+  const title=data.parse.title||candidate;
+  return {definitions,title,reading:readingForPhrase(phrase,title,extractJapaneseReading(data.parse.wikitext)),sourceUrl:`https://ja.wiktionary.org/wiki/${encodeURIComponent(title)}`};
  }
  throw Error('この語句は辞書で見つかりませんでした。基本形で入力すると見つかる場合があります。');
 }
@@ -102,12 +124,12 @@ function meaningForQuestion(phrase,definition){
  meaning=meaning.replace(/であること$/,'である').replace(/なこと$/,'である').replace(/こと$/,'').replace(/であるさま$/,'である').replace(/なさま$/,'である').replace(/さま$/,'');
  return meaning.replace(/[。]+$/,'')+'。';
 }
-function buildWordDraft(word,meaning,sourceUrl,dictionaryTitle=word,correctIndex=Math.floor(Math.random()*5)){
+function buildWordDraft(word,meaning,sourceUrl,dictionaryTitle=word,correctIndex=Math.floor(Math.random()*5),reading=''){
  const answerMeaning=meaningForQuestion(word,meaning);
  const distractors=shuffled(DISTRACTOR_POOL.map(x=>meaningForQuestion(word,x)).filter(x=>x!==answerMeaning)).slice(0,4);
  const choices=[...distractors];choices.splice(correctIndex,0,answerMeaning);
  const explanation=word===dictionaryTitle?`「${word}」は「${answerMeaning}」という意味です。`:`「${word}」は、辞書見出し「${dictionaryTitle}」の語義をこの形に合わせると「${answerMeaning}」という意味です。`;
- draft={id:`word-${Date.now()}-${Math.random().toString(36).slice(2,7)}`,category:'語句の意味',question:`「${word}」の意味として最も適切なものを選んでください。`,choices,answer:correctIndex,explanation,origin:'ja-wiktionary',sourceUrl,sourceLabel:'日本語Wiktionary',contentLicense:'CC BY-SA 4.0',dictionaryTitle,reviewed:true};
+ draft={id:`word-${Date.now()}-${Math.random().toString(36).slice(2,7)}`,category:'語句の意味',question:`「${word}」の意味として最も適切なものを選んでください。`,headword:word,reading,choices,answer:correctIndex,explanation,origin:'ja-wiktionary',sourceUrl,sourceLabel:'日本語Wiktionary',contentLicense:'CC BY-SA 4.0',dictionaryTitle,reviewed:true};
  $('preview-question').textContent=draft.question;
  $('preview-choices').replaceChildren(...choices.map(x=>{const li=document.createElement('li');li.textContent=x;return li;}));
  $('preview-answer').textContent=`正解：${String.fromCharCode(65+draft.answer)}. ${answerMeaning}`;
@@ -118,7 +140,7 @@ function chooseDefinition(index,correctIndex){
  if(!lookupEntry)return;
  const definition=lookupEntry.definitions[index];
  if(!definition)return;
- buildWordDraft($('word-input').value.trim(),definition,lookupEntry.sourceUrl,lookupEntry.title,correctIndex);
+ buildWordDraft($('word-input').value.trim(),definition,lookupEntry.sourceUrl,lookupEntry.title,correctIndex,lookupEntry.reading);
 }
 async function lookupWordDraft(){
  const word=$('word-input').value.trim(),button=$('lookup-submit');
@@ -196,7 +218,7 @@ function clearPublishQueue(){
 }
 function begin(review=false){let data=practiceQuestions();if(review){const latest=new Map(state.history.map(h=>[h.id,h.correct]));data=data.filter(q=>latest.get(q.id)===false);}if(!data.length){$('notice').textContent=review?'復習する問題はありません。最新の解答が不正解の問題がここに入ります。':'問題がありません。';return;}queue=shuffled(data).slice(0,Number($('count').value));index=0;sessionCorrect=0;startTime=Date.now();$('home').hidden=true;$('result').hidden=true;$('practice').hidden=false;const tick=()=>{$('timer').textContent=formatTime(Date.now()-startTime);};tick();timer=setInterval(tick,1000);render();}
 function formatTime(ms){let s=Math.floor(ms/1000);return Math.floor(s/60)+':'+String(s%60).padStart(2,'0');}
-function render(){selected=null;answered=false;let q=queue[index],displayChoices=shuffledWrongChoices(q);$('position').textContent=`${index+1} / ${queue.length}`;$('progress').max=queue.length;$('progress').value=index;$('kind').textContent=q.category;$('question').textContent=q.question;$('passage').hidden=!q.passage;$('passage').textContent=q.passage||'';$('feedback').hidden=true;$('next').hidden=true;$('submit').hidden=false;$('submit').disabled=true;$('choices').replaceChildren();const legend=document.createElement('legend');legend.className='sr';legend.textContent='回答を一つ選択';$('choices').append(legend);displayChoices.forEach((c,i)=>{const label=document.createElement('label');label.className='choice';const radio=document.createElement('input');radio.type='radio';radio.name='answer';radio.value=i;radio.addEventListener('change',()=>{selected=i;$('submit').disabled=false;});const span=document.createElement('span');span.textContent=String.fromCharCode(65+i)+'. '+c;label.append(radio,span);$('choices').append(label);});$('question').tabIndex=-1;$('question').focus();}
+function render(){selected=null;answered=false;let q=queue[index],displayChoices=shuffledChoiceEntries(q);$('position').textContent=`${index+1} / ${queue.length}`;$('progress').max=queue.length;$('progress').value=index;$('kind').textContent=q.category;appendRuby($('question'),q.question,q.headword,q.reading);$('passage').hidden=!q.passage;$('passage').textContent=q.passage||'';$('feedback').hidden=true;$('next').hidden=true;$('submit').hidden=false;$('submit').disabled=true;$('choices').replaceChildren();const legend=document.createElement('legend');legend.className='sr';legend.textContent='回答を一つ選択';$('choices').append(legend);displayChoices.forEach((c,i)=>{const label=document.createElement('label');label.className='choice';const radio=document.createElement('input');radio.type='radio';radio.name='answer';radio.value=i;radio.addEventListener('change',()=>{selected=i;$('submit').disabled=false;});const span=document.createElement('span');span.append(document.createTextNode(String.fromCharCode(65+i)+'. '));if(c.reading){const ruby=document.createElement('ruby'),rt=document.createElement('rt');ruby.append(document.createTextNode(c.text));rt.textContent=c.reading;ruby.append(rt);span.append(ruby);}else span.append(document.createTextNode(c.text));label.append(radio,span);$('choices').append(label);});$('question').tabIndex=-1;$('question').focus();}
 $('submit').onclick=()=>{if(answered||selected===null)return;answered=true;const q=queue[index],correct=selected===q.answer;if(correct)sessionCorrect++;state.history.push({id:q.id,correct,at:new Date().toISOString()});save();[...$('choices').querySelectorAll('label')].forEach((el,i)=>{el.querySelector('input').disabled=true;if(i===q.answer)el.classList.add('correct');else if(i===selected)el.classList.add('wrong');});$('feedback').textContent=`${correct?'正解です。':'今回は不正解です。'} 正解：${String.fromCharCode(65+q.answer)}\n\n${q.explanation}`;if(q.sourceUrl){const p=document.createElement('p'),a=document.createElement('a');a.href=q.sourceUrl;a.target='_blank';a.rel='noopener noreferrer';a.textContent=q.sourceLabel||'出典';p.className='source-note';p.append('意味の出典：',a,q.contentLicense?`（${q.contentLicense}）`:'');$('feedback').append(p);}$('feedback').hidden=false;$('submit').hidden=true;$('next').hidden=false;$('next').textContent=index===queue.length-1?'結果を見る →':'次の問題 →';$('progress').value=index+1;};
 $('next').onclick=()=>{index++;if(index<queue.length){render();return;}clearInterval(timer);$('practice').hidden=true;$('result').hidden=false;$('score').textContent=`${sessionCorrect} / ${queue.length} 問正解`;$('duration').textContent=`正答率 ${Math.round(sessionCorrect/queue.length*100)}% ・ 解答時間 ${formatTime(Date.now()-startTime)}`;};
 $('start').onclick=()=>begin();$('review').onclick=()=>begin(true);$('again').onclick=home;$('exit').onclick=()=>{if(confirm('演習を終了してホームに戻りますか？ 回答済みの記録は保存されます。'))home();};

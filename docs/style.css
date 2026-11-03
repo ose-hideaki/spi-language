@@ -265,6 +265,13 @@ main:has(#practice:not([hidden])) {
   line-height: 1.65;
 }
 
+.practice-card ruby { ruby-align: center; }
+.practice-card rt {
+  color: #68737c;
+  font-size: .52em;
+  font-weight: 500;
+}
+
 fieldset {
   margin: 26px 0 0;
   padding: 0;
