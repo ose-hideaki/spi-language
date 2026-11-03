@@ -1648,5 +1648,105 @@
     "contentLicense": "CC BY-SA 4.0",
     "dictionaryTitle": "詮議",
     "reviewed": true
+  },
+  {
+    "id": "word-1793733594231-8q1s9",
+    "category": "語句の意味",
+    "question": "「粗忽」の意味として最も適切なものを選んでください。",
+    "choices": [
+      "必要以上に遠慮し、自分の意見を控えること",
+      "失敗を恐れず、新しいことに取り組むこと",
+      "表面には現れず、内側に隠れて存在すること",
+      "軽はずみなことやそそっかしいことやまた、そのさまのこと。",
+      "根拠が十分でないまま推測して決めること"
+    ],
+    "answer": 3,
+    "explanation": "「粗忽」は「軽はずみなことやそそっかしいことやまた、そのさまのこと。」という意味です。",
+    "origin": "ja-wiktionary",
+    "sourceUrl": "https://ja.wiktionary.org/wiki/%E7%B2%97%E5%BF%BD",
+    "sourceLabel": "日本語Wiktionary",
+    "contentLicense": "CC BY-SA 4.0",
+    "dictionaryTitle": "粗忽",
+    "reviewed": true
+  },
+  {
+    "id": "word-1793733616798-9gz2a",
+    "category": "語句の意味",
+    "question": "「浚渫」の意味として最も適切なものを選んでください。",
+    "choices": [
+      "前例や慣習を重んじ、それに従うこと",
+      "対立する意見の間を取り持ち、調整すること",
+      "状況に応じて素早く考えや行動を変えること",
+      "物事の一部分だけを取り上げて判断すること",
+      "河川などの水底の土砂などを浚うこと。"
+    ],
+    "answer": 4,
+    "explanation": "「浚渫」は「河川などの水底の土砂などを浚うこと。」という意味です。",
+    "origin": "ja-wiktionary",
+    "sourceUrl": "https://ja.wiktionary.org/wiki/%E6%B5%9A%E6%B8%AB",
+    "sourceLabel": "日本語Wiktionary",
+    "contentLicense": "CC BY-SA 4.0",
+    "dictionaryTitle": "浚渫",
+    "reviewed": true
+  },
+  {
+    "id": "word-1793733722630-09020",
+    "category": "語句の意味",
+    "question": "「収斂」の意味として最も適切なものを選んでください。",
+    "choices": [
+      "表面には現れず、内側に隠れて存在すること",
+      "ある物事だけに心を奪われ、周囲が見えなくなること",
+      "自分の考えを曲げず、最後まで押し通すこと",
+      "互いに関係がなく、別々に存在していること",
+      "系統の異なる生物が次第に相似的な形質を表わすように進化すること。相近。収斂進化。"
+    ],
+    "answer": 4,
+    "explanation": "「収斂」は「系統の異なる生物が次第に相似的な形質を表わすように進化すること。相近。収斂進化。」という意味です。",
+    "origin": "ja-wiktionary",
+    "sourceUrl": "https://ja.wiktionary.org/wiki/%E5%8F%8E%E6%96%82",
+    "sourceLabel": "日本語Wiktionary",
+    "contentLicense": "CC BY-SA 4.0",
+    "dictionaryTitle": "収斂",
+    "reviewed": true
+  },
+  {
+    "id": "word-1793733729491-keb49",
+    "category": "語句の意味",
+    "question": "「桎梏」の意味として最も適切なものを選んでください。",
+    "choices": [
+      "状況に応じて素早く考えや行動を変えること",
+      "必要以上に遠慮し、自分の意見を控えること",
+      "以前の状態を改め、よりよい形に変えること",
+      "前例や慣習を重んじ、それに従うこと",
+      "自由を強く束縛するもの。"
+    ],
+    "answer": 4,
+    "explanation": "「桎梏」は「自由を強く束縛するもの。」という意味です。",
+    "origin": "ja-wiktionary",
+    "sourceUrl": "https://ja.wiktionary.org/wiki/%E6%A1%8E%E6%A2%8F",
+    "sourceLabel": "日本語Wiktionary",
+    "contentLicense": "CC BY-SA 4.0",
+    "dictionaryTitle": "桎梏",
+    "reviewed": true
+  },
+  {
+    "id": "word-1793733732678-37nw8",
+    "category": "語句の意味",
+    "question": "「薫陶」の意味として最も適切なものを選んでください。",
+    "choices": [
+      "互いに関係がなく、別々に存在していること",
+      "状況に応じて素早く考えや行動を変えること",
+      "失敗を恐れず、新しいことに取り組むこと",
+      "徳教によって訓育すること。人徳・品位などで人を感化し、よい方へ導くこと。",
+      "相手の事情を考え、判断や行動を控えめにすること"
+    ],
+    "answer": 3,
+    "explanation": "「薫陶」は「徳教によって訓育すること。人徳・品位などで人を感化し、よい方へ導くこと。」という意味です。",
+    "origin": "ja-wiktionary",
+    "sourceUrl": "https://ja.wiktionary.org/wiki/%E8%96%AB%E9%99%B6",
+    "sourceLabel": "日本語Wiktionary",
+    "contentLicense": "CC BY-SA 4.0",
+    "dictionaryTitle": "薫陶",
+    "reviewed": true
   }
 ]
