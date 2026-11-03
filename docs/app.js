@@ -1,7 +1,29 @@
 'use strict';
 const $=id=>document.getElementById(id);
 const KEY='kotoba-v1';
-let state={history:[],custom:[]},queue=[],index=0,selected=null,answered=false,startTime=0,timer=null,sessionCorrect=0;
+const DISTRACTOR_POOL=[
+ 'ある物事だけに心を奪われ、周囲が見えなくなること',
+ '状況に応じて素早く考えや行動を変えること',
+ '自分の考えを曲げず、最後まで押し通すこと',
+ '物事の一部分だけを取り上げて判断すること',
+ '互いに関係がなく、別々に存在していること',
+ '前例や慣習を重んじ、それに従うこと',
+ '物事の全体を広い視点から捉えること',
+ '表面には現れず、内側に隠れて存在すること',
+ '根拠が十分でないまま推測して決めること',
+ '対立する意見の間を取り持ち、調整すること',
+ '必要以上に遠慮し、自分の意見を控えること',
+ '失敗を恐れず、新しいことに取り組むこと',
+ '複数のものを比べ、共通点と相違点を調べること',
+ '事実を順序立てて、分かりやすく説明すること',
+ '問題の原因をさかのぼって詳しく調べること',
+ '決められた役割や責任を最後まで果たすこと',
+ '意見や要求を強く主張し、相手に迫ること',
+ '相手の事情を考え、判断や行動を控えめにすること',
+ '以前の状態を改め、よりよい形に変えること',
+ 'すでに決まった事柄を、改めて確認すること'
+];
+let state={history:[],custom:[]},queue=[],index=0,selected=null,answered=false,startTime=0,timer=null,sessionCorrect=0,draft=null;
 function validate(data){
  if(!Array.isArray(data)||!data.length||data.length>500)throw Error('1〜500問の配列にしてください。');
  const ids=new Set();
@@ -19,12 +41,37 @@ function save(){try{localStorage.setItem(KEY,JSON.stringify(state));}catch{$('st
 function all(){return [...window.SEED_QUESTIONS,...state.custom];}
 function home(){clearInterval(timer);$('home').hidden=false;$('practice').hidden=true;$('result').hidden=true;const data=all();$('total').textContent=data.length;$('done').textContent=state.history.length;$('rate').textContent=state.history.length?Math.round(state.history.filter(h=>h.correct).length/state.history.length*100)+'%':'—';const current=$('category').value;$('category').replaceChildren(new Option('すべての分野','all'),...Array.from(new Set(data.map(q=>q.category))).map(c=>new Option(c,c)));if([...$('category').options].some(o=>o.value===current))$('category').value=current;}
 function shuffled(a){a=[...a];for(let i=a.length-1;i>0;i--){let j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+function makeWordDraft(){
+ const word=$('word-input').value.trim(),meaning=$('meaning-input').value.trim(),note=$('note-input').value.trim();
+ if(!word||!meaning){$('word-status').textContent='言葉と正しい意味を入力してください。';return;}
+ const distractors=shuffled(DISTRACTOR_POOL.filter(x=>x!==meaning)).slice(0,4);
+ const choices=shuffled([meaning,...distractors]);
+ draft={id:`word-${Date.now()}-${Math.random().toString(36).slice(2,7)}`,category:'語句の意味',question:`「${word}」の意味として最も適切なものを選んでください。`,choices,answer:choices.indexOf(meaning),explanation:`「${word}」は「${meaning}」という意味です。${note?` ${note}`:''}`,origin:'user-form',reviewed:true};
+ $('preview-question').textContent=draft.question;
+ $('preview-choices').replaceChildren(...choices.map(x=>{const li=document.createElement('li');li.textContent=x;return li;}));
+ $('preview-answer').textContent=`正解：${String.fromCharCode(65+draft.answer)}. ${meaning}`;
+ $('word-preview').hidden=false;$('word-status').textContent='問題案を作りました。誤答も含めて内容を確認してください。';
+}
+function addWordDraft(){
+ if(!draft)return;
+ try{
+  validate([draft]);
+  if(all().some(q=>q.question===draft.question))throw Error('同じ言葉の問題がすでにあります。');
+  if(state.custom.length>=500)throw Error('追加問題は合計500問までです。');
+  state.custom.push(draft);save();
+  $('word-form').reset();$('word-preview').hidden=true;draft=null;home();
+  $('word-status').textContent='1問を追加しました。「語句の意味」の演習で出題されます。';
+ }catch(err){$('word-status').textContent='追加できませんでした：'+err.message;}
+}
 function begin(review=false){let data=all();if(review){const latest=new Map(state.history.map(h=>[h.id,h.correct]));data=data.filter(q=>latest.get(q.id)===false);}else if($('category').value!=='all'){data=data.filter(q=>q.category===$('category').value);}if(!data.length){$('notice').textContent=review?'復習する問題はありません。最新の解答が不正解の問題がここに入ります。':'問題がありません。';return;}queue=shuffled(data).slice(0,Number($('count').value));index=0;sessionCorrect=0;startTime=Date.now();$('home').hidden=true;$('result').hidden=true;$('practice').hidden=false;const tick=()=>{$('timer').textContent=formatTime(Date.now()-startTime);};tick();timer=setInterval(tick,1000);render();}
 function formatTime(ms){let s=Math.floor(ms/1000);return Math.floor(s/60)+':'+String(s%60).padStart(2,'0');}
 function render(){selected=null;answered=false;let q=queue[index];$('position').textContent=`${index+1} / ${queue.length}`;$('progress').max=queue.length;$('progress').value=index;$('kind').textContent=q.category;$('question').textContent=q.question;$('passage').hidden=!q.passage;$('passage').textContent=q.passage||'';$('feedback').hidden=true;$('next').hidden=true;$('submit').hidden=false;$('submit').disabled=true;$('choices').replaceChildren();const legend=document.createElement('legend');legend.className='sr';legend.textContent='回答を一つ選択';$('choices').append(legend);q.choices.forEach((c,i)=>{const label=document.createElement('label');label.className='choice';const radio=document.createElement('input');radio.type='radio';radio.name='answer';radio.value=i;radio.addEventListener('change',()=>{selected=i;$('submit').disabled=false;});const span=document.createElement('span');span.textContent=String.fromCharCode(65+i)+'. '+c;label.append(radio,span);$('choices').append(label);});$('question').tabIndex=-1;$('question').focus();}
 $('submit').onclick=()=>{if(answered||selected===null)return;answered=true;const q=queue[index],correct=selected===q.answer;if(correct)sessionCorrect++;state.history.push({id:q.id,correct,at:new Date().toISOString()});save();[...$('choices').querySelectorAll('label')].forEach((el,i)=>{el.querySelector('input').disabled=true;if(i===q.answer)el.classList.add('correct');else if(i===selected)el.classList.add('wrong');});$('feedback').textContent=`${correct?'正解です。':'今回は不正解です。'} 正解：${String.fromCharCode(65+q.answer)}\n\n${q.explanation}`;$('feedback').hidden=false;$('submit').hidden=true;$('next').hidden=false;$('next').textContent=index===queue.length-1?'結果を見る →':'次の問題 →';$('progress').value=index+1;};
 $('next').onclick=()=>{index++;if(index<queue.length){render();return;}clearInterval(timer);$('practice').hidden=true;$('result').hidden=false;$('score').textContent=`${sessionCorrect} / ${queue.length} 問正解`;$('duration').textContent=`正答率 ${Math.round(sessionCorrect/queue.length*100)}% ・ 解答時間 ${formatTime(Date.now()-startTime)}`;};
 $('start').onclick=()=>begin();$('review').onclick=()=>begin(true);$('again').onclick=home;$('exit').onclick=()=>{if(confirm('演習を終了してホームに戻りますか？ 回答済みの記録は保存されます。'))home();};
+$('word-form').onsubmit=e=>{e.preventDefault();makeWordDraft();};
+$('regenerate-word-question').onclick=makeWordDraft;
+$('add-word-question').onclick=addWordDraft;
 $('clear').onclick=()=>{if(confirm('学習記録をリセットしますか？ 追加した問題は残ります。')){state.history=[];save();home();}};
 $('import').onchange=async e=>{try{const f=e.target.files[0];if(!f)return;if(f.size>2e6)throw Error('ファイルは2MB以下にしてください。');const incoming=validate(JSON.parse(await f.text()));const ids=new Set(all().map(q=>q.id));if(incoming.some(q=>ids.has(q.id)))throw Error('既存の問題とIDが重複しています。IDを変えてください。');if(state.custom.length+incoming.length>500)throw Error('追加問題は合計500問までです。');state.custom.push(...incoming);save();home();$('import-status').textContent=`${incoming.length}問を追加しました。内容・正解・解説は人による確認が必要です。`;}catch(err){$('import-status').textContent='読み込みできませんでした：'+err.message;}finally{e.target.value='';}};
 $('export').onclick=()=>{const blob=new Blob([JSON.stringify(state.custom,null,2)],{type:'application/json'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download='my-questions.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);};
