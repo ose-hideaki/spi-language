@@ -25,7 +25,7 @@ const DISTRACTOR_POOL=[
  '以前の状態を改め、よりよい形に変えること',
  'すでに決まった事柄を、改めて確認すること'
 ];
-let state={history:[],custom:[],pending:[]},queue=[],index=0,selected=null,answered=false,startTime=0,timer=null,sessionCorrect=0,draft=null;
+let state={history:[],custom:[],pending:[]},queue=[],index=0,selected=null,answered=false,startTime=0,timer=null,sessionCorrect=0,draft=null,lookupEntry=null;
 function validate(data){
  if(!Array.isArray(data)||!data.length||data.length>500)throw Error('1〜500問の配列にしてください。');
  const ids=new Set();
@@ -50,7 +50,11 @@ function shuffledWrongChoices(question){
  return question.choices.map((choice,i)=>i===question.answer?choice:wrong[wrongIndex++]);
 }
 function cleanWikiMarkup(text){
- text=text.replace(/\{\{おくりがな3\|([^{}]+)\}\}/g,(_,body)=>{const parts=body.split('|');return (parts[0]||'')+(parts[2]||'')+(parts[3]||'')+(parts[5]||'');});
+ text=text
+  .replace(/\{\{おくりがな2\|([^{}]+)\}\}/g,(_,body)=>{const parts=body.split('|');return (parts[0]||'')+(parts[2]||'');})
+  .replace(/\{\{おくりがな3\|([^{}]+)\}\}/g,(_,body)=>{const parts=body.split('|');return (parts[0]||'')+(parts[2]||'')+(parts[4]||'');})
+  .replace(/\{\{ふりがな\|([^{}|]+)\|[^{}]+\}\}/g,'$1')
+  .replace(/\{\{context\|figuratively\|[^{}]*\}\}/g,'（比喩的に）');
  const cleaned=text.replace(/<ref\b[^>]*>[\s\S]*?<\/ref>/gi,'').replace(/<[^>]+>/g,'').replace(/\{\{[^{}]*\}\}/g,'').replace(/\[\[(?:[^\]|]+\|)?([^\]]+)\]\]/g,'$1').replace(/'{2,}/g,'').replace(/\s+/g,' ').replace(/^[。、，・\s]+/,'').trim();
  const parts=cleaned.split('。').map(part=>part.trim()).filter(Boolean);
  if(parts.length>1&&parts.every(part=>[...part].length<=10))return parts.join('や')+'のこと。';
@@ -109,6 +113,12 @@ function buildWordDraft(word,meaning,sourceUrl,dictionaryTitle=word,correctIndex
  $('preview-source').href=sourceUrl;
  $('word-preview').hidden=false;$('word-status').textContent=word===dictionaryTitle?'問題案を作りました。誤答も含めて内容を確認してください。':`辞書見出し「${dictionaryTitle}」の意味から問題案を作りました。内容を確認してください。`;
 }
+function chooseDefinition(index,correctIndex){
+ if(!lookupEntry)return;
+ const definition=lookupEntry.definitions[index];
+ if(!definition)return;
+ buildWordDraft($('word-input').value.trim(),definition,lookupEntry.sourceUrl,lookupEntry.title,correctIndex);
+}
 async function lookupWordDraft(){
  const word=$('word-input').value.trim(),button=$('lookup-submit');
  if(!word){$('word-status').textContent='語句を入力してください。';return;}
@@ -116,11 +126,14 @@ async function lookupWordDraft(){
  button.disabled=true;button.textContent='意味を調べています…';$('word-status').textContent='日本語Wiktionaryを検索しています。';$('word-preview').hidden=true;
  try{
   const entry=await fetchWiktionaryEntry(word);
-  buildWordDraft(word,entry.definitions[0],entry.sourceUrl,entry.title);
- }catch(err){draft=null;$('word-status').textContent=`問題を作れませんでした：${err.message}`;}
+  lookupEntry=entry;
+  $('definition-select').replaceChildren(...entry.definitions.map((definition,index)=>new Option(`${index+1}. ${definition}`,String(index))));
+  $('definition-field').hidden=entry.definitions.length===1;
+  chooseDefinition(0);
+ }catch(err){draft=null;lookupEntry=null;$('word-status').textContent=`問題を作れませんでした：${err.message}`;}
  finally{button.disabled=false;button.textContent='意味を調べて問題案を作る';}
 }
-function regenerateWordDraft(){if(draft)buildWordDraft($('word-input').value.trim(),draft.choices[draft.answer],draft.sourceUrl,draft.dictionaryTitle||$('word-input').value.trim(),draft.answer);}
+function regenerateWordDraft(){if(draft)chooseDefinition(Number($('definition-select').value),draft.answer);}
 function addWordDraft(){
  if(!draft)return;
  try{
@@ -128,7 +141,7 @@ function addWordDraft(){
   if(all().some(q=>q.question===draft.question))throw Error('同じ言葉の問題がすでにあります。');
   if(state.custom.length>=500)throw Error('追加問題は合計500問までです。');
   state.custom.push(draft);save();
-  $('word-form').reset();$('word-preview').hidden=true;draft=null;home();
+  $('word-form').reset();$('word-preview').hidden=true;draft=null;lookupEntry=null;home();
   $('word-status').textContent='1問を追加しました。「語句の意味」の演習で出題されます。';
  }catch(err){$('word-status').textContent='追加できませんでした：'+err.message;}
 }
@@ -139,7 +152,7 @@ function queueWordDraft(){
   if(state.pending.some(q=>q.question===draft.question))throw Error('同じ問題が公開待ちリストにあります。');
   if(state.pending.length>=20)throw Error('一度に登録できるのは20問までです。先に現在のリストを登録してください。');
   state.pending.push(draft);save();
-  $('word-form').reset();$('word-preview').hidden=true;draft=null;renderPublishQueue();
+  $('word-form').reset();$('word-preview').hidden=true;draft=null;lookupEntry=null;renderPublishQueue();
   $('word-status').textContent='公開待ちリストに1問保存しました。続けて問題を作成できます。';
  }catch(err){$('word-status').textContent='リストへ保存できませんでした：'+err.message;}
 }
@@ -187,6 +200,7 @@ $('submit').onclick=()=>{if(answered||selected===null)return;answered=true;const
 $('next').onclick=()=>{index++;if(index<queue.length){render();return;}clearInterval(timer);$('practice').hidden=true;$('result').hidden=false;$('score').textContent=`${sessionCorrect} / ${queue.length} 問正解`;$('duration').textContent=`正答率 ${Math.round(sessionCorrect/queue.length*100)}% ・ 解答時間 ${formatTime(Date.now()-startTime)}`;};
 $('start').onclick=()=>begin();$('review').onclick=()=>begin(true);$('again').onclick=home;$('exit').onclick=()=>{if(confirm('演習を終了してホームに戻りますか？ 回答済みの記録は保存されます。'))home();};
 $('word-form').onsubmit=e=>{e.preventDefault();lookupWordDraft();};
+$('definition-select').onchange=()=>chooseDefinition(Number($('definition-select').value),draft?.answer);
 $('regenerate-word-question').onclick=regenerateWordDraft;
 $('add-word-question').onclick=addWordDraft;
 $('queue-word-question').onclick=queueWordDraft;
