@@ -333,5 +333,25 @@
     "contentLicense": "CC BY-SA 4.0",
     "dictionaryTitle": "猜疑",
     "reviewed": true
+  },
+  {
+    "id": "word-1793693466256-stho6",
+    "category": "語句の意味",
+    "question": "「垂涎」の意味として最も適切なものを選んでください。",
+    "choices": [
+      "表面には現れず、内側に隠れて存在すること",
+      "失敗を恐れず、新しいことに取り組むこと",
+      "ある物事だけに心を奪われ、周囲が見えなくなること",
+      "（比喩的に）或る物を切実に欲しがること。",
+      "対立する意見の間を取り持ち、調整すること"
+    ],
+    "answer": 3,
+    "explanation": "「垂涎」は「（比喩的に）或る物を切実に欲しがること。」という意味です。",
+    "origin": "ja-wiktionary",
+    "sourceUrl": "https://ja.wiktionary.org/wiki/%E5%9E%82%E6%B6%8E",
+    "sourceLabel": "日本語Wiktionary",
+    "contentLicense": "CC BY-SA 4.0",
+    "dictionaryTitle": "垂涎",
+    "reviewed": true
   }
 ]
