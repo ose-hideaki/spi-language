@@ -768,5 +768,285 @@ window.SEED_QUESTIONS = [
     "contentLicense": "CC BY-SA 4.0",
     "dictionaryTitle": "暁通",
     "reviewed": true
+  },
+  {
+    "id": "word-1793698644105-2e0cw",
+    "category": "語句の意味",
+    "question": "「営営」の意味として最も適切なものを選んでください。",
+    "choices": [
+      "状況に応じて素早く考えや行動を変えること",
+      "根拠が十分でないまま推測して決めること",
+      "ある物事だけに心を奪われ、周囲が見えなくなること",
+      "脚繁く往来するさま。",
+      "自分の考えを曲げず、最後まで押し通すこと"
+    ],
+    "answer": 3,
+    "explanation": "「営営」は「脚繁く往来するさま。」という意味です。",
+    "origin": "ja-wiktionary",
+    "sourceUrl": "https://ja.wiktionary.org/wiki/%E5%96%B6%E5%96%B6",
+    "sourceLabel": "日本語Wiktionary",
+    "contentLicense": "CC BY-SA 4.0",
+    "dictionaryTitle": "営営",
+    "reviewed": true
+  },
+  {
+    "id": "word-1793698652943-sucu5",
+    "category": "語句の意味",
+    "question": "「闊達」の意味として最も適切なものを選んでください。",
+    "choices": [
+      "決められた役割や責任を最後まで果たすこと",
+      "物事の一部分だけを取り上げて判断すること",
+      "度量が大きく、物事に拘らないこと。また、そのようなさま。",
+      "自分の考えを曲げず、最後まで押し通すこと",
+      "失敗を恐れず、新しいことに取り組むこと"
+    ],
+    "answer": 2,
+    "explanation": "「闊達」は「度量が大きく、物事に拘らないこと。また、そのようなさま。」という意味です。",
+    "origin": "ja-wiktionary",
+    "sourceUrl": "https://ja.wiktionary.org/wiki/%E9%97%8A%E9%81%94",
+    "sourceLabel": "日本語Wiktionary",
+    "contentLicense": "CC BY-SA 4.0",
+    "dictionaryTitle": "闊達",
+    "reviewed": true
+  },
+  {
+    "id": "word-1793698659208-msbac",
+    "category": "語句の意味",
+    "question": "「論駁」の意味として最も適切なものを選んでください。",
+    "choices": [
+      "事実を順序立てて、分かりやすく説明すること",
+      "自分の考えを曲げず、最後まで押し通すこと",
+      "相手の欠点、誤り、不正などを論じて攻撃すること。",
+      "相手の事情を考え、判断や行動を控えめにすること",
+      "物事の全体を広い視点から捉えること"
+    ],
+    "answer": 2,
+    "explanation": "「論駁」は「相手の欠点、誤り、不正などを論じて攻撃すること。」という意味です。",
+    "origin": "ja-wiktionary",
+    "sourceUrl": "https://ja.wiktionary.org/wiki/%E8%AB%96%E9%A7%81",
+    "sourceLabel": "日本語Wiktionary",
+    "contentLicense": "CC BY-SA 4.0",
+    "dictionaryTitle": "論駁",
+    "reviewed": true
+  },
+  {
+    "id": "word-1793698666338-9v3sn",
+    "category": "語句の意味",
+    "question": "「奢侈」の意味として最も適切なものを選んでください。",
+    "choices": [
+      "ある物事だけに心を奪われ、周囲が見えなくなること",
+      "互いに関係がなく、別々に存在していること",
+      "失敗を恐れず、新しいことに取り組むこと",
+      "身分不相応な贅沢をすること。",
+      "物事の一部分だけを取り上げて判断すること"
+    ],
+    "answer": 3,
+    "explanation": "「奢侈」は「身分不相応な贅沢をすること。」という意味です。",
+    "origin": "ja-wiktionary",
+    "sourceUrl": "https://ja.wiktionary.org/wiki/%E5%A5%A2%E4%BE%88",
+    "sourceLabel": "日本語Wiktionary",
+    "contentLicense": "CC BY-SA 4.0",
+    "dictionaryTitle": "奢侈",
+    "reviewed": true
+  },
+  {
+    "id": "word-1793698669180-k10vf",
+    "category": "語句の意味",
+    "question": "「進言」の意味として最も適切なものを選んでください。",
+    "choices": [
+      "失敗を恐れず、新しいことに取り組むこと",
+      "自分より上のものに意見を申し上げること。",
+      "問題の原因をさかのぼって詳しく調べること",
+      "複数のものを比べ、共通点と相違点を調べること",
+      "決められた役割や責任を最後まで果たすこと"
+    ],
+    "answer": 1,
+    "explanation": "「進言」は「自分より上のものに意見を申し上げること。」という意味です。",
+    "origin": "ja-wiktionary",
+    "sourceUrl": "https://ja.wiktionary.org/wiki/%E9%80%B2%E8%A8%80",
+    "sourceLabel": "日本語Wiktionary",
+    "contentLicense": "CC BY-SA 4.0",
+    "dictionaryTitle": "進言",
+    "reviewed": true
+  },
+  {
+    "id": "word-1793698673071-otf45",
+    "category": "語句の意味",
+    "question": "「直言」の意味として最も適切なものを選んでください。",
+    "choices": [
+      "状況に応じて素早く考えや行動を変えること",
+      "相手の事情を考え、判断や行動を控えめにすること",
+      "自分の考えを曲げず、最後まで押し通すこと",
+      "物事の全体を広い視点から捉えること",
+      "自分が思っていることを率直に言うこと。"
+    ],
+    "answer": 4,
+    "explanation": "「直言」は「自分が思っていることを率直に言うこと。」という意味です。",
+    "origin": "ja-wiktionary",
+    "sourceUrl": "https://ja.wiktionary.org/wiki/%E7%9B%B4%E8%A8%80",
+    "sourceLabel": "日本語Wiktionary",
+    "contentLicense": "CC BY-SA 4.0",
+    "dictionaryTitle": "直言",
+    "reviewed": true
+  },
+  {
+    "id": "word-1793698676347-tiak4",
+    "category": "語句の意味",
+    "question": "「恭順」の意味として最も適切なものを選んでください。",
+    "choices": [
+      "根拠が十分でないまま推測して決めること",
+      "前例や慣習を重んじ、それに従うこと",
+      "謹んで命令などに従うこと。",
+      "必要以上に遠慮し、自分の意見を控えること",
+      "物事の一部分だけを取り上げて判断すること"
+    ],
+    "answer": 2,
+    "explanation": "「恭順」は「謹んで命令などに従うこと。」という意味です。",
+    "origin": "ja-wiktionary",
+    "sourceUrl": "https://ja.wiktionary.org/wiki/%E6%81%AD%E9%A0%86",
+    "sourceLabel": "日本語Wiktionary",
+    "contentLicense": "CC BY-SA 4.0",
+    "dictionaryTitle": "恭順",
+    "reviewed": true
+  },
+  {
+    "id": "word-1793698679112-8zrjg",
+    "category": "語句の意味",
+    "question": "「大綱」の意味として最も適切なものを選んでください。",
+    "choices": [
+      "根本的な事項、事柄やおおもとのこと。",
+      "決められた役割や責任を最後まで果たすこと",
+      "相手の事情を考え、判断や行動を控えめにすること",
+      "ある物事だけに心を奪われ、周囲が見えなくなること",
+      "対立する意見の間を取り持ち、調整すること"
+    ],
+    "answer": 0,
+    "explanation": "「大綱」は「根本的な事項、事柄やおおもとのこと。」という意味です。",
+    "origin": "ja-wiktionary",
+    "sourceUrl": "https://ja.wiktionary.org/wiki/%E5%A4%A7%E7%B6%B1",
+    "sourceLabel": "日本語Wiktionary",
+    "contentLicense": "CC BY-SA 4.0",
+    "dictionaryTitle": "大綱",
+    "reviewed": true
+  },
+  {
+    "id": "word-1793698684335-3tca5",
+    "category": "語句の意味",
+    "question": "「逓減」の意味として最も適切なものを選んでください。",
+    "choices": [
+      "複数のものを比べ、共通点と相違点を調べること",
+      "数量が少しずつ減ること。",
+      "相手の事情を考え、判断や行動を控えめにすること",
+      "前例や慣習を重んじ、それに従うこと",
+      "物事の一部分だけを取り上げて判断すること"
+    ],
+    "answer": 1,
+    "explanation": "「逓減」は「数量が少しずつ減ること。」という意味です。",
+    "origin": "ja-wiktionary",
+    "sourceUrl": "https://ja.wiktionary.org/wiki/%E9%80%93%E6%B8%9B",
+    "sourceLabel": "日本語Wiktionary",
+    "contentLicense": "CC BY-SA 4.0",
+    "dictionaryTitle": "逓減",
+    "reviewed": true
+  },
+  {
+    "id": "word-1793698688682-ou2of",
+    "category": "語句の意味",
+    "question": "「軋轢」の意味として最も適切なものを選んでください。",
+    "choices": [
+      "決められた役割や責任を最後まで果たすこと",
+      "表面には現れず、内側に隠れて存在すること",
+      "問題の原因をさかのぼって詳しく調べること",
+      "ある物事だけに心を奪われ、周囲が見えなくなること",
+      "争いが生じて、仲が悪くなること。摩擦や葛藤を生じること。"
+    ],
+    "answer": 4,
+    "explanation": "「軋轢」は「争いが生じて、仲が悪くなること。摩擦や葛藤を生じること。」という意味です。",
+    "origin": "ja-wiktionary",
+    "sourceUrl": "https://ja.wiktionary.org/wiki/%E8%BB%8B%E8%BD%A2",
+    "sourceLabel": "日本語Wiktionary",
+    "contentLicense": "CC BY-SA 4.0",
+    "dictionaryTitle": "軋轢",
+    "reviewed": true
+  },
+  {
+    "id": "word-1793698692527-4lm1r",
+    "category": "語句の意味",
+    "question": "「典拠」の意味として最も適切なものを選んでください。",
+    "choices": [
+      "問題の原因をさかのぼって詳しく調べること",
+      "対立する意見の間を取り持ち、調整すること",
+      "物事を成り立たせるもとになる出典・根拠。",
+      "複数のものを比べ、共通点と相違点を調べること",
+      "物事の一部分だけを取り上げて判断すること"
+    ],
+    "answer": 2,
+    "explanation": "「典拠」は「物事を成り立たせるもとになる出典・根拠。」という意味です。",
+    "origin": "ja-wiktionary",
+    "sourceUrl": "https://ja.wiktionary.org/wiki/%E5%85%B8%E6%8B%A0",
+    "sourceLabel": "日本語Wiktionary",
+    "contentLicense": "CC BY-SA 4.0",
+    "dictionaryTitle": "典拠",
+    "reviewed": true
+  },
+  {
+    "id": "word-1793698698963-034tj",
+    "category": "語句の意味",
+    "question": "「泰斗」の意味として最も適切なものを選んでください。",
+    "choices": [
+      "ある分野における最高権威。",
+      "状況に応じて素早く考えや行動を変えること",
+      "失敗を恐れず、新しいことに取り組むこと",
+      "表面には現れず、内側に隠れて存在すること",
+      "すでに決まった事柄を、改めて確認すること"
+    ],
+    "answer": 0,
+    "explanation": "「泰斗」は「ある分野における最高権威。」という意味です。",
+    "origin": "ja-wiktionary",
+    "sourceUrl": "https://ja.wiktionary.org/wiki/%E6%B3%B0%E6%96%97",
+    "sourceLabel": "日本語Wiktionary",
+    "contentLicense": "CC BY-SA 4.0",
+    "dictionaryTitle": "泰斗",
+    "reviewed": true
+  },
+  {
+    "id": "word-1793698725931-fnb8y",
+    "category": "語句の意味",
+    "question": "「比肩」の意味として最も適切なものを選んでください。",
+    "choices": [
+      "自分の考えを曲げず、最後まで押し通すこと",
+      "能力や価値などが他のものと比べて同等であること",
+      "前例や慣習を重んじ、それに従うこと",
+      "物事の全体を広い視点から捉えること",
+      "複数のものを比べ、共通点と相違点を調べること"
+    ],
+    "answer": 1,
+    "explanation": "「比肩」は「能力や価値などが他のものと比べて同等であること」という意味です。",
+    "origin": "ja-wiktionary",
+    "sourceUrl": "https://ja.wiktionary.org/wiki/%E6%AF%94%E8%82%A9",
+    "sourceLabel": "日本語Wiktionary",
+    "contentLicense": "CC BY-SA 4.0",
+    "dictionaryTitle": "比肩",
+    "reviewed": true
+  },
+  {
+    "id": "word-1793698735560-52zwu",
+    "category": "語句の意味",
+    "question": "「遁走」の意味として最も適切なものを選んでください。",
+    "choices": [
+      "複数のものを比べ、共通点と相違点を調べること",
+      "必要以上に遠慮し、自分の意見を控えること",
+      "すでに決まった事柄を、改めて確認すること",
+      "決められた役割や責任を最後まで果たすこと",
+      "逃げて走ることや逃走のこと。"
+    ],
+    "answer": 4,
+    "explanation": "「遁走」は「逃げて走ることや逃走のこと。」という意味です。",
+    "origin": "ja-wiktionary",
+    "sourceUrl": "https://ja.wiktionary.org/wiki/%E9%81%81%E8%B5%B0",
+    "sourceLabel": "日本語Wiktionary",
+    "contentLicense": "CC BY-SA 4.0",
+    "dictionaryTitle": "遁走",
+    "reviewed": true
   }
 ];
