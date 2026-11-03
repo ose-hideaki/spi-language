@@ -105,13 +105,15 @@ async function loadSubmissions() {
     return;
   }
   submissions = data;
-  $('submission-count').textContent = `${data.length}件`;
-  $('submission-list-status').textContent = data.length ? '' : '届いた語句はありません。';
   renderSubmissions();
 }
 
 function renderSubmissions() {
-  $('submission-list').replaceChildren(...submissions.map(item => {
+  const queuedSubmissionIds = new Set(state.pending.map(question => question.submissionId).filter(Boolean));
+  const visibleSubmissions = submissions.filter(item => !queuedSubmissionIds.has(item.id));
+  $('submission-count').textContent = `${visibleSubmissions.length}件`;
+  $('submission-list-status').textContent = visibleSubmissions.length ? '' : '届いた語句はありません。';
+  $('submission-list').replaceChildren(...visibleSubmissions.map(item => {
     const li = document.createElement('li');
     const word = document.createElement('span');
     word.className = 'submission-word';
