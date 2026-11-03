@@ -273,5 +273,65 @@ window.SEED_QUESTIONS = [
     "contentLicense": "CC BY-SA 4.0",
     "dictionaryTitle": "応分",
     "reviewed": true
+  },
+  {
+    "id": "word-1793674526117-7n1ug",
+    "category": "語句の意味",
+    "question": "「進取」の意味として最も適切なものを選んでください。",
+    "choices": [
+      "決められた役割や責任を最後まで果たすこと",
+      "以前の状態を改め、よりよい形に変えること",
+      "進んで前例の無い物事等をすること。",
+      "前例や慣習を重んじ、それに従うこと",
+      "物事の全体を広い視点から捉えること"
+    ],
+    "answer": 2,
+    "explanation": "「進取」は「進んで前例の無い物事等をすること。」という意味です。",
+    "origin": "ja-wiktionary",
+    "sourceUrl": "https://ja.wiktionary.org/wiki/%E9%80%B2%E5%8F%96",
+    "sourceLabel": "日本語Wiktionary",
+    "contentLicense": "CC BY-SA 4.0",
+    "dictionaryTitle": "進取",
+    "reviewed": true
+  },
+  {
+    "id": "word-1793674549933-iocbq",
+    "category": "語句の意味",
+    "question": "「溜飲」の意味として最も適切なものを選んでください。",
+    "choices": [
+      "ある物事だけに心を奪われ、周囲が見えなくなること",
+      "胃の中に食物が滞り、酸っぱい液が込み上げること。",
+      "複数のものを比べ、共通点と相違点を調べること",
+      "前例や慣習を重んじ、それに従うこと",
+      "互いに関係がなく、別々に存在していること"
+    ],
+    "answer": 1,
+    "explanation": "「溜飲」は「胃の中に食物が滞り、酸っぱい液が込み上げること。」という意味です。",
+    "origin": "ja-wiktionary",
+    "sourceUrl": "https://ja.wiktionary.org/wiki/%E6%BA%9C%E9%A3%B2",
+    "sourceLabel": "日本語Wiktionary",
+    "contentLicense": "CC BY-SA 4.0",
+    "dictionaryTitle": "溜飲",
+    "reviewed": true
+  },
+  {
+    "id": "word-1793674787997-xve3f",
+    "category": "語句の意味",
+    "question": "「猜疑」の意味として最も適切なものを選んでください。",
+    "choices": [
+      "物事の全体を広い視点から捉えること",
+      "根拠が十分でないまま推測して決めること",
+      "人の言動に、何か裏があるのではないかと疑うこと。",
+      "事実を順序立てて、分かりやすく説明すること",
+      "表面には現れず、内側に隠れて存在すること"
+    ],
+    "answer": 2,
+    "explanation": "「猜疑」は「人の言動に、何か裏があるのではないかと疑うこと。」という意味です。",
+    "origin": "ja-wiktionary",
+    "sourceUrl": "https://ja.wiktionary.org/wiki/%E7%8C%9C%E7%96%91",
+    "sourceLabel": "日本語Wiktionary",
+    "contentLicense": "CC BY-SA 4.0",
+    "dictionaryTitle": "猜疑",
+    "reviewed": true
   }
 ];
