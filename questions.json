@@ -748,5 +748,25 @@
     "contentLicense": "CC BY-SA 4.0",
     "dictionaryTitle": "詭弁",
     "reviewed": true
+  },
+  {
+    "id": "word-1793698336005-9669j",
+    "category": "語句の意味",
+    "question": "「暁通」の意味として最も適切なものを選んでください。",
+    "choices": [
+      "すでに決まった事柄を、改めて確認すること",
+      "必要以上に遠慮し、自分の意見を控えること",
+      "事情などについて精通していること。",
+      "物事の全体を広い視点から捉えること",
+      "意見や要求を強く主張し、相手に迫ること"
+    ],
+    "answer": 2,
+    "explanation": "「暁通」は「事情などについて精通していること。」という意味です。",
+    "origin": "ja-wiktionary",
+    "sourceUrl": "https://ja.wiktionary.org/wiki/%E6%9A%81%E9%80%9A",
+    "sourceLabel": "日本語Wiktionary",
+    "contentLicense": "CC BY-SA 4.0",
+    "dictionaryTitle": "暁通",
+    "reviewed": true
   }
 ]
