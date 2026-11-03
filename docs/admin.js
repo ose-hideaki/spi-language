@@ -19,7 +19,7 @@ const DISTRACTORS = [
   '以前の状態を改め、よりよい形に変えること', 'すでに決まった事柄を、改めて確認すること'
 ];
 
-let state = { pending: [] };
+let state = { pending: [], publishReady: false };
 let submissions = [];
 let lookupEntry = null;
 let draft = null;
@@ -27,12 +27,15 @@ let activeSubmissionId = null;
 
 try {
   const saved = JSON.parse(localStorage.getItem(KEY));
-  if (saved && Array.isArray(saved.pending)) state.pending = saved.pending;
+  if (saved && Array.isArray(saved.pending)) {
+    state.pending = saved.pending;
+    state.publishReady = saved.publishReady === true;
+  }
 } catch {}
 
 function save() {
   const saved = JSON.parse(localStorage.getItem(KEY) || '{}');
-  localStorage.setItem(KEY, JSON.stringify({ ...saved, pending: state.pending }));
+  localStorage.setItem(KEY, JSON.stringify({ ...saved, pending: state.pending, publishReady: state.publishReady }));
 }
 
 function shuffled(values) {
@@ -123,14 +126,6 @@ function renderSubmissions() {
     create.onclick = () => useSubmission(item);
     li.append(word, create);
 
-    const queued = state.pending.find(question => question.submissionId === item.id);
-    if (queued) {
-      const done = document.createElement('button');
-      done.type = 'button';
-      done.textContent = '公開済みにする';
-      done.onclick = () => markSubmission(item.id, 'processed', queued.id);
-      li.append(done);
-    }
     const reject = document.createElement('button');
     reject.type = 'button';
     reject.textContent = '見送る';
@@ -267,6 +262,7 @@ function queueDraft() {
     if (state.pending.some(item => item.question === draft.question)) throw Error('同じ問題がリストにあります。');
     if (state.pending.length >= 20) throw Error('一度に登録できるのは20問までです。');
     state.pending.push(draft);
+    state.publishReady = false;
     save();
     $('word-form').reset();
     $('word-preview').hidden = true;
@@ -285,6 +281,8 @@ function renderPublishQueue() {
   $('publish-count').textContent = `${state.pending.length}問`;
   $('publish-empty').hidden = state.pending.length > 0;
   $('publish-all-questions').disabled = state.pending.length === 0;
+  $('publish-complete').hidden = state.pending.length === 0 || !state.publishReady;
+  $('publish-complete').disabled = state.pending.length === 0 || !state.publishReady;
   $('clear-publish-list').disabled = state.pending.length === 0;
   $('publish-list').replaceChildren(...state.pending.map((question, index) => {
     const li = document.createElement('li');
@@ -293,7 +291,7 @@ function renderPublishQueue() {
     text.textContent = question.question;
     remove.type = 'button';
     remove.textContent = '削除';
-    remove.onclick = () => { state.pending.splice(index, 1); save(); renderPublishQueue(); renderSubmissions(); };
+    remove.onclick = () => { state.pending.splice(index, 1); state.publishReady = false; save(); renderPublishQueue(); renderSubmissions(); };
     li.append(text, remove);
     return li;
   }));
@@ -321,7 +319,10 @@ async function publishPending() {
     const body = `${state.pending.length}問を全員向け問題リストへ登録します。アプリで確認済みの内容です。\n\n## 登録内容\n\n${summaries}\n\n<details>\n<summary>自動登録データ（編集しないでください）</summary>\n\n<!-- SPI_PUBLIC_QUESTIONS_GZIP_START -->\n\`\`\`text\n${payload}\n\`\`\`\n<!-- SPI_PUBLIC_QUESTIONS_GZIP_END -->\n\n</details>`;
     const url = `${ISSUE_URL}?${new URLSearchParams({ title: `[公開問題一括登録] ${state.pending.length}問`, body })}`;
     if (popup) popup.location.replace(url); else location.href = url;
-    $('word-status').textContent = 'GitHubの確認画面を開きました。Submitして公開を確認してください。';
+    state.publishReady = true;
+    save();
+    renderPublishQueue();
+    $('word-status').textContent = 'GitHubでSubmitして公開を確認したら、この画面の「公開完了」を押してください。';
   } catch (error) {
     if (popup) popup.close();
     $('word-status').textContent = `登録を始められませんでした：${error.message}`;
@@ -331,6 +332,38 @@ async function publishPending() {
   }
 }
 
+async function completePublishedQuestions() {
+  if (!state.pending.length || !state.publishReady) return;
+  if (!confirm('GitHubでSubmitし、問題が公開されたことを確認しましたか？')) return;
+  const button = $('publish-complete');
+  button.disabled = true;
+  button.textContent = '届いたリストを更新中…';
+  const completedAt = new Date().toISOString();
+  const results = await Promise.all(state.pending.map(async question => {
+    if (!question.submissionId) return { question, success: true };
+    const { data, error } = await client
+      .from('word_submissions')
+      .update({ status: 'processed', processed_at: completedAt, question_id: question.id })
+      .eq('id', question.submissionId)
+      .eq('status', 'pending')
+      .select('id');
+    return { question, success: !error && data.length === 1, error };
+  }));
+  const failed = results.filter(result => !result.success);
+  state.pending = failed.map(result => result.question);
+  state.publishReady = failed.length > 0;
+  save();
+  renderPublishQueue();
+  await loadSubmissions();
+  if (failed.length) {
+    console.error(failed.map(result => result.error));
+    $('word-status').textContent = `${results.length - failed.length}問を処理済みにしました。${failed.length}問は更新できなかったため、公開待ちリストに残しています。`;
+  } else {
+    $('word-status').textContent = '公開した問題を処理済みにし、対応する語句を届いたリストから消しました。';
+  }
+  button.textContent = '公開完了（届いたリストから消す）';
+}
+
 $('reload-submissions').onclick = loadSubmissions;
 $('word-form').onsubmit = event => { event.preventDefault(); activeSubmissionId = activeSubmissionId || null; lookupWordDraft(); };
 $('word-input').addEventListener('input', () => { if (!submissions.some(item => item.id === activeSubmissionId && item.word === $('word-input').value.trim())) activeSubmissionId = null; });
@@ -338,9 +371,11 @@ $('definition-select').onchange = () => chooseDefinition(Number($('definition-se
 $('regenerate-word-question').onclick = () => { if (draft) chooseDefinition(Number($('definition-select').value), draft.answer); };
 $('queue-word-question').onclick = queueDraft;
 $('publish-all-questions').onclick = publishPending;
+$('publish-complete').onclick = completePublishedQuestions;
 $('clear-publish-list').onclick = () => {
   if (state.pending.length && confirm('公開待ちリストを空にしますか？')) {
     state.pending = [];
+    state.publishReady = false;
     save();
     renderPublishQueue();
     renderSubmissions();
