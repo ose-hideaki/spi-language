@@ -79,14 +79,22 @@ async function fetchWiktionaryEntry(phrase){
  }
  throw Error('この語句は辞書で見つかりませんでした。基本形で入力すると見つかる場合があります。');
 }
+function meaningForQuestion(phrase,definition){
+ const cleaned=definition.trim();
+ if(!phrase.endsWith('な'))return cleaned;
+ let meaning=cleaned.split('。').find(Boolean)?.trim()||cleaned;
+ meaning=meaning.replace(/であること$/,'である').replace(/なこと$/,'である').replace(/こと$/,'').replace(/であるさま$/,'である').replace(/なさま$/,'である').replace(/さま$/,'');
+ return meaning.replace(/[。]+$/,'')+'。';
+}
 function buildWordDraft(word,meaning,sourceUrl,dictionaryTitle=word,correctIndex=Math.floor(Math.random()*5)){
- const distractors=shuffled(DISTRACTOR_POOL.filter(x=>x!==meaning)).slice(0,4);
- const choices=[...distractors];choices.splice(correctIndex,0,meaning);
- const explanation=word===dictionaryTitle?`「${word}」は「${meaning}」という意味です。`:`「${word}」は、辞書見出し「${dictionaryTitle}」の語義では「${meaning}」という意味です。`;
+ const answerMeaning=meaningForQuestion(word,meaning);
+ const distractors=shuffled(DISTRACTOR_POOL.map(x=>meaningForQuestion(word,x)).filter(x=>x!==answerMeaning)).slice(0,4);
+ const choices=[...distractors];choices.splice(correctIndex,0,answerMeaning);
+ const explanation=word===dictionaryTitle?`「${word}」は「${answerMeaning}」という意味です。`:`「${word}」は、辞書見出し「${dictionaryTitle}」の語義をこの形に合わせると「${answerMeaning}」という意味です。`;
  draft={id:`word-${Date.now()}-${Math.random().toString(36).slice(2,7)}`,category:'語句の意味',question:`「${word}」の意味として最も適切なものを選んでください。`,choices,answer:correctIndex,explanation,origin:'ja-wiktionary',sourceUrl,sourceLabel:'日本語Wiktionary',contentLicense:'CC BY-SA 4.0',dictionaryTitle,reviewed:true};
  $('preview-question').textContent=draft.question;
  $('preview-choices').replaceChildren(...choices.map(x=>{const li=document.createElement('li');li.textContent=x;return li;}));
- $('preview-answer').textContent=`正解：${String.fromCharCode(65+draft.answer)}. ${meaning}`;
+ $('preview-answer').textContent=`正解：${String.fromCharCode(65+draft.answer)}. ${answerMeaning}`;
  $('preview-source').href=sourceUrl;
  $('word-preview').hidden=false;$('word-status').textContent=word===dictionaryTitle?'問題案を作りました。誤答も含めて内容を確認してください。':`辞書見出し「${dictionaryTitle}」の意味から問題案を作りました。内容を確認してください。`;
 }
