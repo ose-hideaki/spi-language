@@ -2,6 +2,7 @@
 const $=id=>document.getElementById(id);
 const KEY='kotoba-v1';
 const WIKTIONARY_API='https://ja.wiktionary.org/w/api.php';
+const PUBLIC_QUESTION_ISSUE_URL='https://github.com/ose-hideaki/spi-language/issues/new';
 const DISTRACTOR_POOL=[
  'ある物事だけに心を奪われ、周囲が見えなくなること',
  '状況に応じて素早く考えや行動を変えること',
@@ -121,6 +122,17 @@ function addWordDraft(){
   $('word-status').textContent='1問を追加しました。「語句の意味」の演習で出題されます。';
  }catch(err){$('word-status').textContent='追加できませんでした：'+err.message;}
 }
+function publishWordDraft(){
+ if(!draft)return;
+ try{
+  validate([draft]);
+  const body=['この問題を全員向け問題リストへ登録します。内容を確認してSubmitしてください。','','<!-- SPI_PUBLIC_QUESTION_START -->','```json',JSON.stringify(draft,null,2),'```','<!-- SPI_PUBLIC_QUESTION_END -->'].join('\n');
+  const title=`[公開問題登録] ${draft.question.slice(0,80)}`;
+  const params=new URLSearchParams({title,body});
+  window.open(`${PUBLIC_QUESTION_ISSUE_URL}?${params}`,'_blank','noopener,noreferrer');
+  $('word-status').textContent='GitHubの管理者用確認画面を開きました。内容を確認してSubmitしてください。';
+ }catch(err){$('word-status').textContent='公開登録を開始できませんでした：'+err.message;}
+}
 function begin(review=false){let data=all();if(review){const latest=new Map(state.history.map(h=>[h.id,h.correct]));data=data.filter(q=>latest.get(q.id)===false);}else if($('category').value!=='all'){data=data.filter(q=>q.category===$('category').value);}if(!data.length){$('notice').textContent=review?'復習する問題はありません。最新の解答が不正解の問題がここに入ります。':'問題がありません。';return;}queue=shuffled(data).slice(0,Number($('count').value));index=0;sessionCorrect=0;startTime=Date.now();$('home').hidden=true;$('result').hidden=true;$('practice').hidden=false;const tick=()=>{$('timer').textContent=formatTime(Date.now()-startTime);};tick();timer=setInterval(tick,1000);render();}
 function formatTime(ms){let s=Math.floor(ms/1000);return Math.floor(s/60)+':'+String(s%60).padStart(2,'0');}
 function render(){selected=null;answered=false;let q=queue[index],displayChoices=shuffledWrongChoices(q);$('position').textContent=`${index+1} / ${queue.length}`;$('progress').max=queue.length;$('progress').value=index;$('kind').textContent=q.category;$('question').textContent=q.question;$('passage').hidden=!q.passage;$('passage').textContent=q.passage||'';$('feedback').hidden=true;$('next').hidden=true;$('submit').hidden=false;$('submit').disabled=true;$('choices').replaceChildren();const legend=document.createElement('legend');legend.className='sr';legend.textContent='回答を一つ選択';$('choices').append(legend);displayChoices.forEach((c,i)=>{const label=document.createElement('label');label.className='choice';const radio=document.createElement('input');radio.type='radio';radio.name='answer';radio.value=i;radio.addEventListener('change',()=>{selected=i;$('submit').disabled=false;});const span=document.createElement('span');span.textContent=String.fromCharCode(65+i)+'. '+c;label.append(radio,span);$('choices').append(label);});$('question').tabIndex=-1;$('question').focus();}
@@ -130,4 +142,5 @@ $('start').onclick=()=>begin();$('review').onclick=()=>begin(true);$('again').on
 $('word-form').onsubmit=e=>{e.preventDefault();lookupWordDraft();};
 $('regenerate-word-question').onclick=regenerateWordDraft;
 $('add-word-question').onclick=addWordDraft;
+$('publish-word-question').onclick=publishWordDraft;
 validate(window.SEED_QUESTIONS);home();
