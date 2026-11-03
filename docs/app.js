@@ -52,12 +52,18 @@ function shuffledWrongChoices(question){
 function cleanWikiMarkup(text){
  return text.replace(/<ref\b[^>]*>[\s\S]*?<\/ref>/gi,'').replace(/<[^>]+>/g,'').replace(/\{\{[^{}]*\}\}/g,'').replace(/\[\[(?:[^\]|]+\|)?([^\]]+)\]\]/g,'$1').replace(/'{2,}/g,'').replace(/\s+/g,' ').trim();
 }
-function extractJapaneseDefinitions(wikitext){
- const lines=wikitext.split(/\r?\n/),start=lines.findIndex(line=>/^==\s*(?:\{\{ja\}\}|日本語)\s*==\s*$/.test(line));
+function isUsableDefinition(definition,headword){
+ if(/日本語に同じ|同じ意味|同義語|を参照|に同じ/.test(definition))return false;
+ const compact=definition.replace(/[（(][^）)]*[）)]/g,'').replace(/[\s。、，・「」『』【】]/g,'');
+ return Boolean(compact)&&compact!==headword;
+}
+function extractJapaneseDefinitions(wikitext,headword){
+ const lines=wikitext.split(/\r?\n/),start=lines.findIndex(line=>/^==\s*(?:\{\{(?:ja|L\|ja)\}\}|日本語)\s*==\s*$/.test(line));
+ if(start<0)return [];
  let end=-1;
- if(start>=0)end=lines.findIndex((line,i)=>i>start&&/^==[^=].*[^=]==\s*$/.test(line));
- const scoped=start<0?lines:lines.slice(start+1,end<0?lines.length:end);
- return scoped.filter(line=>/^#(?![#*:])/.test(line)).map(line=>cleanWikiMarkup(line.slice(1))).filter(Boolean);
+ end=lines.findIndex((line,i)=>i>start&&/^==[^=].*[^=]==\s*$/.test(line));
+ const scoped=lines.slice(start+1,end<0?lines.length:end);
+ return scoped.filter(line=>/^#(?![#*:])/.test(line)).map(line=>cleanWikiMarkup(line.slice(1))).filter(definition=>isUsableDefinition(definition,headword));
 }
 function wiktionaryCandidates(phrase){
  const candidates=[phrase];
@@ -74,7 +80,7 @@ async function fetchWiktionaryEntry(phrase){
   if(!response.ok)throw Error('辞書へ接続できませんでした。');
   const data=await response.json();
   if(data.error||!data.parse?.wikitext)continue;
-  const definitions=extractJapaneseDefinitions(data.parse.wikitext);
+  const definitions=extractJapaneseDefinitions(data.parse.wikitext,data.parse.title||candidate);
   if(!definitions.length)continue;
   return {definitions,title:data.parse.title||candidate,sourceUrl:`https://ja.wiktionary.org/wiki/${encodeURIComponent(data.parse.title||candidate)}`};
  }
@@ -106,7 +112,7 @@ async function lookupWordDraft(){
  button.disabled=true;button.textContent='意味を調べています…';$('word-status').textContent='日本語Wiktionaryを検索しています。';$('word-preview').hidden=true;
  try{
   const entry=await fetchWiktionaryEntry(word);
-  buildWordDraft(word,entry.definitions.at(-1),entry.sourceUrl,entry.title);
+  buildWordDraft(word,entry.definitions[0],entry.sourceUrl,entry.title);
  }catch(err){draft=null;$('word-status').textContent=`問題を作れませんでした：${err.message}`;}
  finally{button.disabled=false;button.textContent='意味を調べて問題案を作る';}
 }
