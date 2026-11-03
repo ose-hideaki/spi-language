@@ -528,5 +528,165 @@
     "contentLicense": "CC BY-SA 4.0",
     "dictionaryTitle": "出仕",
     "reviewed": true
+  },
+  {
+    "id": "word-1793697588868-rweb1",
+    "category": "語句の意味",
+    "question": "「射幸」の意味として最も適切なものを選んでください。",
+    "choices": [
+      "まぐれや偶然をあてにして利益を得ようとすること。",
+      "物事の全体を広い視点から捉えること",
+      "意見や要求を強く主張し、相手に迫ること",
+      "複数のものを比べ、共通点と相違点を調べること",
+      "対立する意見の間を取り持ち、調整すること"
+    ],
+    "answer": 0,
+    "explanation": "「射幸」は「まぐれや偶然をあてにして利益を得ようとすること。」という意味です。",
+    "origin": "ja-wiktionary",
+    "sourceUrl": "https://ja.wiktionary.org/wiki/%E5%B0%84%E5%B9%B8",
+    "sourceLabel": "日本語Wiktionary",
+    "contentLicense": "CC BY-SA 4.0",
+    "dictionaryTitle": "射幸",
+    "reviewed": true
+  },
+  {
+    "id": "word-1793697598264-ryzsa",
+    "category": "語句の意味",
+    "question": "「省察」の意味として最も適切なものを選んでください。",
+    "choices": [
+      "状況に応じて素早く考えや行動を変えること",
+      "失敗を恐れず、新しいことに取り組むこと",
+      "物事の一部分だけを取り上げて判断すること",
+      "事実を順序立てて、分かりやすく説明すること",
+      "反省し善悪、是非を自ら熟考すること。"
+    ],
+    "answer": 4,
+    "explanation": "「省察」は「反省し善悪、是非を自ら熟考すること。」という意味です。",
+    "origin": "ja-wiktionary",
+    "sourceUrl": "https://ja.wiktionary.org/wiki/%E7%9C%81%E5%AF%9F",
+    "sourceLabel": "日本語Wiktionary",
+    "contentLicense": "CC BY-SA 4.0",
+    "dictionaryTitle": "省察",
+    "reviewed": true
+  },
+  {
+    "id": "word-1793697610823-qdnbc",
+    "category": "語句の意味",
+    "question": "「具備」の意味として最も適切なものを選んでください。",
+    "choices": [
+      "事実を順序立てて、分かりやすく説明すること",
+      "決められた役割や責任を最後まで果たすこと",
+      "以前の状態を改め、よりよい形に変えること",
+      "対立する意見の間を取り持ち、調整すること",
+      "十分に備わっていること。"
+    ],
+    "answer": 4,
+    "explanation": "「具備」は「十分に備わっていること。」という意味です。",
+    "origin": "ja-wiktionary",
+    "sourceUrl": "https://ja.wiktionary.org/wiki/%E5%85%B7%E5%82%99",
+    "sourceLabel": "日本語Wiktionary",
+    "contentLicense": "CC BY-SA 4.0",
+    "dictionaryTitle": "具備",
+    "reviewed": true
+  },
+  {
+    "id": "word-1793697617962-oe6ip",
+    "category": "語句の意味",
+    "question": "「雄飛」の意味として最も適切なものを選んでください。",
+    "choices": [
+      "根拠が十分でないまま推測して決めること",
+      "意見や要求を強く主張し、相手に迫ること",
+      "物事の全体を広い視点から捉えること",
+      "互いに関係がなく、別々に存在していること",
+      "雄の鳥が飛び立つように、大志を抱き大いに活動すること。"
+    ],
+    "answer": 4,
+    "explanation": "「雄飛」は「雄の鳥が飛び立つように、大志を抱き大いに活動すること。」という意味です。",
+    "origin": "ja-wiktionary",
+    "sourceUrl": "https://ja.wiktionary.org/wiki/%E9%9B%84%E9%A3%9B",
+    "sourceLabel": "日本語Wiktionary",
+    "contentLicense": "CC BY-SA 4.0",
+    "dictionaryTitle": "雄飛",
+    "reviewed": true
+  },
+  {
+    "id": "word-1793697627009-bsg5m",
+    "category": "語句の意味",
+    "question": "「斟酌」の意味として最も適切なものを選んでください。",
+    "choices": [
+      "すでに決まった事柄を、改めて確認すること",
+      "ある物事だけに心を奪われ、周囲が見えなくなること",
+      "相手の事情や心情などを推量すること。また、それによって手加減すること。",
+      "意見や要求を強く主張し、相手に迫ること",
+      "根拠が十分でないまま推測して決めること"
+    ],
+    "answer": 2,
+    "explanation": "「斟酌」は「相手の事情や心情などを推量すること。また、それによって手加減すること。」という意味です。",
+    "origin": "ja-wiktionary",
+    "sourceUrl": "https://ja.wiktionary.org/wiki/%E6%96%9F%E9%85%8C",
+    "sourceLabel": "日本語Wiktionary",
+    "contentLicense": "CC BY-SA 4.0",
+    "dictionaryTitle": "斟酌",
+    "reviewed": true
+  },
+  {
+    "id": "word-1793697635539-o9lq5",
+    "category": "語句の意味",
+    "question": "「督励」の意味として最も適切なものを選んでください。",
+    "choices": [
+      "互いに関係がなく、別々に存在していること",
+      "複数のものを比べ、共通点と相違点を調べること",
+      "状況に応じて素早く考えや行動を変えること",
+      "部下などを監督し、励ますこと。",
+      "表面には現れず、内側に隠れて存在すること"
+    ],
+    "answer": 3,
+    "explanation": "「督励」は「部下などを監督し、励ますこと。」という意味です。",
+    "origin": "ja-wiktionary",
+    "sourceUrl": "https://ja.wiktionary.org/wiki/%E7%9D%A3%E5%8A%B1",
+    "sourceLabel": "日本語Wiktionary",
+    "contentLicense": "CC BY-SA 4.0",
+    "dictionaryTitle": "督励",
+    "reviewed": true
+  },
+  {
+    "id": "word-1793697641989-8rqz7",
+    "category": "語句の意味",
+    "question": "「円熟」の意味として最も適切なものを選んでください。",
+    "choices": [
+      "互いに関係がなく、別々に存在していること",
+      "意見や要求を強く主張し、相手に迫ること",
+      "人格や技術などが十分に熟達すること。円満熟達。",
+      "状況に応じて素早く考えや行動を変えること",
+      "自分の考えを曲げず、最後まで押し通すこと"
+    ],
+    "answer": 2,
+    "explanation": "「円熟」は「人格や技術などが十分に熟達すること。円満熟達。」という意味です。",
+    "origin": "ja-wiktionary",
+    "sourceUrl": "https://ja.wiktionary.org/wiki/%E5%86%86%E7%86%9F",
+    "sourceLabel": "日本語Wiktionary",
+    "contentLicense": "CC BY-SA 4.0",
+    "dictionaryTitle": "円熟",
+    "reviewed": true
+  },
+  {
+    "id": "word-1793697647562-qicx0",
+    "category": "語句の意味",
+    "question": "「老成」の意味として最も適切なものを選んでください。",
+    "choices": [
+      "複数のものを比べ、共通点と相違点を調べること",
+      "経験を積んで熟達すること。",
+      "表面には現れず、内側に隠れて存在すること",
+      "根拠が十分でないまま推測して決めること",
+      "自分の考えを曲げず、最後まで押し通すこと"
+    ],
+    "answer": 1,
+    "explanation": "「老成」は「経験を積んで熟達すること。」という意味です。",
+    "origin": "ja-wiktionary",
+    "sourceUrl": "https://ja.wiktionary.org/wiki/%E8%80%81%E6%88%90",
+    "sourceLabel": "日本語Wiktionary",
+    "contentLicense": "CC BY-SA 4.0",
+    "dictionaryTitle": "老成",
+    "reviewed": true
   }
 ]
