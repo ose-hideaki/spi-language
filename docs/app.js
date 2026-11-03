@@ -203,8 +203,7 @@ async function encodeQuestionBatch(questions){
  return {start:'<!-- SPI_PUBLIC_QUESTIONS_GZIP_START -->',end:'<!-- SPI_PUBLIC_QUESTIONS_GZIP_END -->',language:'text',payload:btoa(binary)};
 }
 function buildPublishIssueBody(questions,encoded){
- const summaries=questions.map((question,index)=>{const answer=question.choices[question.answer].replace(/\s+/g,' ');return `### ${index+1}. ${question.question}\n\n**正解：${String.fromCharCode(65+question.answer)}. ${answer}**`;}).join('\n\n');
- return [`${questions.length}問を全員向け問題リストへ登録します。アプリで確認済みの内容です。`,'','## 登録内容','',summaries,'','<details>','<summary>自動登録データ（編集しないでください）</summary>','',encoded.start,`\`\`\`${encoded.language}`,encoded.payload,'```',encoded.end,'','</details>'].join('\n');
+ return [`${questions.length}問を全員向け問題リストへ登録します。アプリで確認済みの内容です。`,'',encoded.start,`\`\`\`${encoded.language}`,encoded.payload,'```',encoded.end].join('\n');
 }
 async function publishPendingQuestions(){
  if(!state.pending.length)return;

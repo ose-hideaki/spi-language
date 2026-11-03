@@ -348,8 +348,7 @@ async function publishPending() {
   try {
     state.pending.forEach(validateQuestion);
     const payload = await encodeQuestions(state.pending);
-    const summaries = state.pending.map((question, index) => `### ${index + 1}. ${question.question}\n\n**正解：${String.fromCharCode(65 + question.answer)}. ${question.choices[question.answer]}**`).join('\n\n');
-    const body = `${state.pending.length}問を全員向け問題リストへ登録します。アプリで確認済みの内容です。\n\n## 登録内容\n\n${summaries}\n\n<details>\n<summary>自動登録データ（編集しないでください）</summary>\n\n<!-- SPI_PUBLIC_QUESTIONS_GZIP_START -->\n\`\`\`text\n${payload}\n\`\`\`\n<!-- SPI_PUBLIC_QUESTIONS_GZIP_END -->\n\n</details>`;
+    const body = `${state.pending.length}問を全員向け問題リストへ登録します。アプリで確認済みの内容です。\n\n<!-- SPI_PUBLIC_QUESTIONS_GZIP_START -->\n\`\`\`text\n${payload}\n\`\`\`\n<!-- SPI_PUBLIC_QUESTIONS_GZIP_END -->`;
     const url = `${ISSUE_URL}?${new URLSearchParams({ title: `[公開問題一括登録] ${state.pending.length}問`, body })}`;
     if (popup) popup.location.replace(url); else location.href = url;
     state.publishReady = true;
