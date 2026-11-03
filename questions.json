@@ -688,5 +688,45 @@
     "contentLicense": "CC BY-SA 4.0",
     "dictionaryTitle": "老成",
     "reviewed": true
+  },
+  {
+    "id": "word-1793697979694-98zze",
+    "category": "語句の意味",
+    "question": "「陶冶」の意味として最も適切なものを選んでください。",
+    "choices": [
+      "物事の一部分だけを取り上げて判断すること",
+      "根拠が十分でないまま推測して決めること",
+      "人の生まれもった性質や能力を発達、向上させること。薫陶。",
+      "事実を順序立てて、分かりやすく説明すること",
+      "意見や要求を強く主張し、相手に迫ること"
+    ],
+    "answer": 2,
+    "explanation": "「陶冶」は「人の生まれもった性質や能力を発達、向上させること。薫陶。」という意味です。",
+    "origin": "ja-wiktionary",
+    "sourceUrl": "https://ja.wiktionary.org/wiki/%E9%99%B6%E5%86%B6",
+    "sourceLabel": "日本語Wiktionary",
+    "contentLicense": "CC BY-SA 4.0",
+    "dictionaryTitle": "陶冶",
+    "reviewed": true
+  },
+  {
+    "id": "word-1793697991555-m8g3z",
+    "category": "語句の意味",
+    "question": "「逡巡」の意味として最も適切なものを選んでください。",
+    "choices": [
+      "状況に応じて素早く考えや行動を変えること",
+      "ぐずぐずと悩んで、行動を起こさないこと、ためらうこと。",
+      "失敗を恐れず、新しいことに取り組むこと",
+      "物事の一部分だけを取り上げて判断すること",
+      "すでに決まった事柄を、改めて確認すること"
+    ],
+    "answer": 1,
+    "explanation": "「逡巡」は「ぐずぐずと悩んで、行動を起こさないこと、ためらうこと。」という意味です。",
+    "origin": "ja-wiktionary",
+    "sourceUrl": "https://ja.wiktionary.org/wiki/%E9%80%A1%E5%B7%A1",
+    "sourceLabel": "日本語Wiktionary",
+    "contentLicense": "CC BY-SA 4.0",
+    "dictionaryTitle": "逡巡",
+    "reviewed": true
   }
 ]
