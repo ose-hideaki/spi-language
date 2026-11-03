@@ -1248,5 +1248,405 @@ window.SEED_QUESTIONS = [
     "contentLicense": "CC BY-SA 4.0",
     "dictionaryTitle": "打診",
     "reviewed": true
+  },
+  {
+    "id": "word-1793733213260-cjo8s",
+    "category": "語句の意味",
+    "question": "「標榜」の意味として最も適切なものを選んでください。",
+    "choices": [
+      "失敗を恐れず、新しいことに取り組むこと",
+      "自らの主義や主張、立場などを公然と表明すること。",
+      "状況に応じて素早く考えや行動を変えること",
+      "物事の全体を広い視点から捉えること",
+      "複数のものを比べ、共通点と相違点を調べること"
+    ],
+    "answer": 1,
+    "explanation": "「標榜」は「自らの主義や主張、立場などを公然と表明すること。」という意味です。",
+    "origin": "ja-wiktionary",
+    "sourceUrl": "https://ja.wiktionary.org/wiki/%E6%A8%99%E6%A6%9C",
+    "sourceLabel": "日本語Wiktionary",
+    "contentLicense": "CC BY-SA 4.0",
+    "dictionaryTitle": "標榜",
+    "reviewed": true
+  },
+  {
+    "id": "word-1793733221894-c1zk9",
+    "category": "語句の意味",
+    "question": "「吹聴」の意味として最も適切なものを選んでください。",
+    "choices": [
+      "多くの人々に言うことや言い触らすことや触れ回ることや言い広めることのこと。",
+      "状況に応じて素早く考えや行動を変えること",
+      "互いに関係がなく、別々に存在していること",
+      "意見や要求を強く主張し、相手に迫ること",
+      "問題の原因をさかのぼって詳しく調べること"
+    ],
+    "answer": 0,
+    "explanation": "「吹聴」は「多くの人々に言うことや言い触らすことや触れ回ることや言い広めることのこと。」という意味です。",
+    "origin": "ja-wiktionary",
+    "sourceUrl": "https://ja.wiktionary.org/wiki/%E5%90%B9%E8%81%B4",
+    "sourceLabel": "日本語Wiktionary",
+    "contentLicense": "CC BY-SA 4.0",
+    "dictionaryTitle": "吹聴",
+    "reviewed": true
+  },
+  {
+    "id": "word-1793733227117-jxf9n",
+    "category": "語句の意味",
+    "question": "「寡聞」の意味として最も適切なものを選んでください。",
+    "choices": [
+      "問題の原因をさかのぼって詳しく調べること",
+      "根拠が十分でないまま推測して決めること",
+      "物事の全体を広い視点から捉えること",
+      "相手の事情を考え、判断や行動を控えめにすること",
+      "聞くことが少なく見識が狭いこと。多くは謙遜の表現として用いる。"
+    ],
+    "answer": 4,
+    "explanation": "「寡聞」は「聞くことが少なく見識が狭いこと。多くは謙遜の表現として用いる。」という意味です。",
+    "origin": "ja-wiktionary",
+    "sourceUrl": "https://ja.wiktionary.org/wiki/%E5%AF%A1%E8%81%9E",
+    "sourceLabel": "日本語Wiktionary",
+    "contentLicense": "CC BY-SA 4.0",
+    "dictionaryTitle": "寡聞",
+    "reviewed": true
+  },
+  {
+    "id": "word-1793733304874-z0oos",
+    "category": "語句の意味",
+    "question": "「卑近」の意味として最も適切なものを選んでください。",
+    "choices": [
+      "問題の原因をさかのぼって詳しく調べること",
+      "複数のものを比べ、共通点と相違点を調べること",
+      "互いに関係がなく、別々に存在していること",
+      "通俗的で身近な様子や卑くて近い様子のこと。",
+      "以前の状態を改め、よりよい形に変えること"
+    ],
+    "answer": 3,
+    "explanation": "「卑近」は「通俗的で身近な様子や卑くて近い様子のこと。」という意味です。",
+    "origin": "ja-wiktionary",
+    "sourceUrl": "https://ja.wiktionary.org/wiki/%E5%8D%91%E8%BF%91",
+    "sourceLabel": "日本語Wiktionary",
+    "contentLicense": "CC BY-SA 4.0",
+    "dictionaryTitle": "卑近",
+    "reviewed": true
+  },
+  {
+    "id": "word-1793733314261-le3px",
+    "category": "語句の意味",
+    "question": "「遜色」の意味として最も適切なものを選んでください。",
+    "choices": [
+      "決められた役割や責任を最後まで果たすこと",
+      "対立する意見の間を取り持ち、調整すること",
+      "物事の一部分だけを取り上げて判断すること",
+      "他と比べて劣っていること。見劣りすること。",
+      "表面には現れず、内側に隠れて存在すること"
+    ],
+    "answer": 3,
+    "explanation": "「遜色」は「他と比べて劣っていること。見劣りすること。」という意味です。",
+    "origin": "ja-wiktionary",
+    "sourceUrl": "https://ja.wiktionary.org/wiki/%E9%81%9C%E8%89%B2",
+    "sourceLabel": "日本語Wiktionary",
+    "contentLicense": "CC BY-SA 4.0",
+    "dictionaryTitle": "遜色",
+    "reviewed": true
+  },
+  {
+    "id": "word-1793733333497-3l5tq",
+    "category": "語句の意味",
+    "question": "「腐心」の意味として最も適切なものを選んでください。",
+    "choices": [
+      "物事を成し遂げるのに心を悩ますこと。",
+      "相手の事情を考え、判断や行動を控えめにすること",
+      "以前の状態を改め、よりよい形に変えること",
+      "物事の全体を広い視点から捉えること",
+      "失敗を恐れず、新しいことに取り組むこと"
+    ],
+    "answer": 0,
+    "explanation": "「腐心」は「物事を成し遂げるのに心を悩ますこと。」という意味です。",
+    "origin": "ja-wiktionary",
+    "sourceUrl": "https://ja.wiktionary.org/wiki/%E8%85%90%E5%BF%83",
+    "sourceLabel": "日本語Wiktionary",
+    "contentLicense": "CC BY-SA 4.0",
+    "dictionaryTitle": "腐心",
+    "reviewed": true
+  },
+  {
+    "id": "word-1793733338438-gqb6m",
+    "category": "語句の意味",
+    "question": "「憐憫」の意味として最も適切なものを選んでください。",
+    "choices": [
+      "失敗を恐れず、新しいことに取り組むこと",
+      "ある物事だけに心を奪われ、周囲が見えなくなること",
+      "表面には現れず、内側に隠れて存在すること",
+      "哀れに思い同情すること。",
+      "自分の考えを曲げず、最後まで押し通すこと"
+    ],
+    "answer": 3,
+    "explanation": "「憐憫」は「哀れに思い同情すること。」という意味です。",
+    "origin": "ja-wiktionary",
+    "sourceUrl": "https://ja.wiktionary.org/wiki/%E6%86%90%E6%86%AB",
+    "sourceLabel": "日本語Wiktionary",
+    "contentLicense": "CC BY-SA 4.0",
+    "dictionaryTitle": "憐憫",
+    "reviewed": true
+  },
+  {
+    "id": "word-1793733343548-lq6xg",
+    "category": "語句の意味",
+    "question": "「漸次」の意味として最も適切なものを選んでください。",
+    "choices": [
+      "相手の事情を考え、判断や行動を控えめにすること",
+      "失敗を恐れず、新しいことに取り組むこと",
+      "次第に。段々。「漸次に」の形でも用いられる。",
+      "物事の全体を広い視点から捉えること",
+      "事実を順序立てて、分かりやすく説明すること"
+    ],
+    "answer": 2,
+    "explanation": "「漸次」は「次第に。段々。「漸次に」の形でも用いられる。」という意味です。",
+    "origin": "ja-wiktionary",
+    "sourceUrl": "https://ja.wiktionary.org/wiki/%E6%BC%B8%E6%AC%A1",
+    "sourceLabel": "日本語Wiktionary",
+    "contentLicense": "CC BY-SA 4.0",
+    "dictionaryTitle": "漸次",
+    "reviewed": true
+  },
+  {
+    "id": "word-1793733349696-pltm8",
+    "category": "語句の意味",
+    "question": "「英気」の意味として最も適切なものを選んでください。",
+    "choices": [
+      "失敗を恐れず、新しいことに取り組むこと",
+      "ある物事だけに心を奪われ、周囲が見えなくなること",
+      "優れた才気。",
+      "複数のものを比べ、共通点と相違点を調べること",
+      "意見や要求を強く主張し、相手に迫ること"
+    ],
+    "answer": 2,
+    "explanation": "「英気」は「優れた才気。」という意味です。",
+    "origin": "ja-wiktionary",
+    "sourceUrl": "https://ja.wiktionary.org/wiki/%E8%8B%B1%E6%B0%97",
+    "sourceLabel": "日本語Wiktionary",
+    "contentLicense": "CC BY-SA 4.0",
+    "dictionaryTitle": "英気",
+    "reviewed": true
+  },
+  {
+    "id": "word-1793733361965-yun5c",
+    "category": "語句の意味",
+    "question": "「委細」の意味として最も適切なものを選んでください。",
+    "choices": [
+      "詳しい事情。",
+      "ある物事だけに心を奪われ、周囲が見えなくなること",
+      "前例や慣習を重んじ、それに従うこと",
+      "状況に応じて素早く考えや行動を変えること",
+      "必要以上に遠慮し、自分の意見を控えること"
+    ],
+    "answer": 0,
+    "explanation": "「委細」は「詳しい事情。」という意味です。",
+    "origin": "ja-wiktionary",
+    "sourceUrl": "https://ja.wiktionary.org/wiki/%E5%A7%94%E7%B4%B0",
+    "sourceLabel": "日本語Wiktionary",
+    "contentLicense": "CC BY-SA 4.0",
+    "dictionaryTitle": "委細",
+    "reviewed": true
+  },
+  {
+    "id": "word-1793733381129-qsllh",
+    "category": "語句の意味",
+    "question": "「畏敬」の意味として最も適切なものを選んでください。",
+    "choices": [
+      "自分の考えを曲げず、最後まで押し通すこと",
+      "互いに関係がなく、別々に存在していること",
+      "問題の原因をさかのぼって詳しく調べること",
+      "対立する意見の間を取り持ち、調整すること",
+      "崇高なものや人を恐れ敬うこと。"
+    ],
+    "answer": 4,
+    "explanation": "「畏敬」は「崇高なものや人を恐れ敬うこと。」という意味です。",
+    "origin": "ja-wiktionary",
+    "sourceUrl": "https://ja.wiktionary.org/wiki/%E7%95%8F%E6%95%AC",
+    "sourceLabel": "日本語Wiktionary",
+    "contentLicense": "CC BY-SA 4.0",
+    "dictionaryTitle": "畏敬",
+    "reviewed": true
+  },
+  {
+    "id": "word-1793733385124-74j5n",
+    "category": "語句の意味",
+    "question": "「僥倖」の意味として最も適切なものを選んでください。",
+    "choices": [
+      "ある物事だけに心を奪われ、周囲が見えなくなること",
+      "事実を順序立てて、分かりやすく説明すること",
+      "偶然の幸運や思いがけない幸せのこと。",
+      "状況に応じて素早く考えや行動を変えること",
+      "問題の原因をさかのぼって詳しく調べること"
+    ],
+    "answer": 2,
+    "explanation": "「僥倖」は「偶然の幸運や思いがけない幸せのこと。」という意味です。",
+    "origin": "ja-wiktionary",
+    "sourceUrl": "https://ja.wiktionary.org/wiki/%E5%83%A5%E5%80%96",
+    "sourceLabel": "日本語Wiktionary",
+    "contentLicense": "CC BY-SA 4.0",
+    "dictionaryTitle": "僥倖",
+    "reviewed": true
+  },
+  {
+    "id": "word-1793733405604-vtl6l",
+    "category": "語句の意味",
+    "question": "「隘路」の意味として最も適切なものを選んでください。",
+    "choices": [
+      "物事の全体を広い視点から捉えること",
+      "状況に応じて素早く考えや行動を変えること",
+      "互いに関係がなく、別々に存在していること",
+      "支障となるもの。",
+      "必要以上に遠慮し、自分の意見を控えること"
+    ],
+    "answer": 3,
+    "explanation": "「隘路」は「支障となるもの。」という意味です。",
+    "origin": "ja-wiktionary",
+    "sourceUrl": "https://ja.wiktionary.org/wiki/%E9%9A%98%E8%B7%AF",
+    "sourceLabel": "日本語Wiktionary",
+    "contentLicense": "CC BY-SA 4.0",
+    "dictionaryTitle": "隘路",
+    "reviewed": true
+  },
+  {
+    "id": "word-1793733410724-fsksl",
+    "category": "語句の意味",
+    "question": "「愁眉」の意味として最も適切なものを選んでください。",
+    "choices": [
+      "事実を順序立てて、分かりやすく説明すること",
+      "心配や愁いでしかめた眉。心配そうな表情。",
+      "問題の原因をさかのぼって詳しく調べること",
+      "根拠が十分でないまま推測して決めること",
+      "相手の事情を考え、判断や行動を控えめにすること"
+    ],
+    "answer": 1,
+    "explanation": "「愁眉」は「心配や愁いでしかめた眉。心配そうな表情。」という意味です。",
+    "origin": "ja-wiktionary",
+    "sourceUrl": "https://ja.wiktionary.org/wiki/%E6%84%81%E7%9C%89",
+    "sourceLabel": "日本語Wiktionary",
+    "contentLicense": "CC BY-SA 4.0",
+    "dictionaryTitle": "愁眉",
+    "reviewed": true
+  },
+  {
+    "id": "word-1793733417789-8afeu",
+    "category": "語句の意味",
+    "question": "「頓挫」の意味として最も適切なものを選んでください。",
+    "choices": [
+      "失敗を恐れず、新しいことに取り組むこと",
+      "計画などが行き詰まって進展しなくなること。途中で挫けること。",
+      "対立する意見の間を取り持ち、調整すること",
+      "すでに決まった事柄を、改めて確認すること",
+      "根拠が十分でないまま推測して決めること"
+    ],
+    "answer": 1,
+    "explanation": "「頓挫」は「計画などが行き詰まって進展しなくなること。途中で挫けること。」という意味です。",
+    "origin": "ja-wiktionary",
+    "sourceUrl": "https://ja.wiktionary.org/wiki/%E9%A0%93%E6%8C%AB",
+    "sourceLabel": "日本語Wiktionary",
+    "contentLicense": "CC BY-SA 4.0",
+    "dictionaryTitle": "頓挫",
+    "reviewed": true
+  },
+  {
+    "id": "word-1793733560846-iplax",
+    "category": "語句の意味",
+    "question": "「篭絡」の意味として最も適切なものを選んでください。",
+    "choices": [
+      "相手の事情を考え、判断や行動を控えめにすること",
+      "人をまるめこんで自由に操ること。",
+      "複数のものを比べ、共通点と相違点を調べること",
+      "前例や慣習を重んじ、それに従うこと",
+      "対立する意見の間を取り持ち、調整すること"
+    ],
+    "answer": 1,
+    "explanation": "「篭絡」は「人をまるめこんで自由に操ること。」という意味です。",
+    "origin": "ja-wiktionary",
+    "sourceUrl": "https://ja.wiktionary.org/wiki/%E7%AF%AD%E7%B5%A1",
+    "sourceLabel": "日本語Wiktionary",
+    "contentLicense": "CC BY-SA 4.0",
+    "dictionaryTitle": "篭絡",
+    "reviewed": true
+  },
+  {
+    "id": "word-1793733564532-6yvtz",
+    "category": "語句の意味",
+    "question": "「懐柔」の意味として最も適切なものを選んでください。",
+    "choices": [
+      "対立する意見の間を取り持ち、調整すること",
+      "他人を手懐けて、自分の思い通りに動かすこと。",
+      "根拠が十分でないまま推測して決めること",
+      "互いに関係がなく、別々に存在していること",
+      "必要以上に遠慮し、自分の意見を控えること"
+    ],
+    "answer": 1,
+    "explanation": "「懐柔」は「他人を手懐けて、自分の思い通りに動かすこと。」という意味です。",
+    "origin": "ja-wiktionary",
+    "sourceUrl": "https://ja.wiktionary.org/wiki/%E6%87%90%E6%9F%94",
+    "sourceLabel": "日本語Wiktionary",
+    "contentLicense": "CC BY-SA 4.0",
+    "dictionaryTitle": "懐柔",
+    "reviewed": true
+  },
+  {
+    "id": "word-1793733567501-xk8gg",
+    "category": "語句の意味",
+    "question": "「奉職」の意味として最も適切なものを選んでください。",
+    "choices": [
+      "公務員や教員など公の職に就くこと。",
+      "表面には現れず、内側に隠れて存在すること",
+      "自分の考えを曲げず、最後まで押し通すこと",
+      "意見や要求を強く主張し、相手に迫ること",
+      "以前の状態を改め、よりよい形に変えること"
+    ],
+    "answer": 0,
+    "explanation": "「奉職」は「公務員や教員など公の職に就くこと。」という意味です。",
+    "origin": "ja-wiktionary",
+    "sourceUrl": "https://ja.wiktionary.org/wiki/%E5%A5%89%E8%81%B7",
+    "sourceLabel": "日本語Wiktionary",
+    "contentLicense": "CC BY-SA 4.0",
+    "dictionaryTitle": "奉職",
+    "reviewed": true
+  },
+  {
+    "id": "word-1793733571625-j63oy",
+    "category": "語句の意味",
+    "question": "「糊塗」の意味として最も適切なものを選んでください。",
+    "choices": [
+      "一時凌ぎに上辺だけを取りつくろこと。",
+      "互いに関係がなく、別々に存在していること",
+      "複数のものを比べ、共通点と相違点を調べること",
+      "問題の原因をさかのぼって詳しく調べること",
+      "前例や慣習を重んじ、それに従うこと"
+    ],
+    "answer": 0,
+    "explanation": "「糊塗」は「一時凌ぎに上辺だけを取りつくろこと。」という意味です。",
+    "origin": "ja-wiktionary",
+    "sourceUrl": "https://ja.wiktionary.org/wiki/%E7%B3%8A%E5%A1%97",
+    "sourceLabel": "日本語Wiktionary",
+    "contentLicense": "CC BY-SA 4.0",
+    "dictionaryTitle": "糊塗",
+    "reviewed": true
+  },
+  {
+    "id": "word-1793733579384-ifahy",
+    "category": "語句の意味",
+    "question": "「詮議」の意味として最も適切なものを選んでください。",
+    "choices": [
+      "対立する意見の間を取り持ち、調整すること",
+      "複数のものを比べ、共通点と相違点を調べること",
+      "評議して物事を説き明かすこと。",
+      "すでに決まった事柄を、改めて確認すること",
+      "物事の一部分だけを取り上げて判断すること"
+    ],
+    "answer": 2,
+    "explanation": "「詮議」は「評議して物事を説き明かすこと。」という意味です。",
+    "origin": "ja-wiktionary",
+    "sourceUrl": "https://ja.wiktionary.org/wiki/%E8%A9%AE%E8%AD%B0",
+    "sourceLabel": "日本語Wiktionary",
+    "contentLicense": "CC BY-SA 4.0",
+    "dictionaryTitle": "詮議",
+    "reviewed": true
   }
 ];
