@@ -58,35 +58,50 @@ function extractJapaneseDefinitions(wikitext){
  const scoped=start<0?lines:lines.slice(start+1,end<0?lines.length:end);
  return scoped.filter(line=>/^#(?![#*:])/.test(line)).map(line=>cleanWikiMarkup(line.slice(1))).filter(Boolean);
 }
-function buildWordDraft(word,meaning,sourceUrl,correctIndex=Math.floor(Math.random()*5)){
+function wiktionaryCandidates(phrase){
+ const candidates=[phrase];
+ const endings=['である','だった','でした','される','させる','している','して','した','する','な','に','の','だ'];
+ for(const ending of endings){
+  if(phrase.endsWith(ending)&&phrase.length>ending.length)candidates.push(phrase.slice(0,-ending.length));
+ }
+ return [...new Set(candidates)];
+}
+async function fetchWiktionaryEntry(phrase){
+ for(const candidate of wiktionaryCandidates(phrase)){
+  const params=new URLSearchParams({action:'parse',page:candidate,prop:'wikitext',format:'json',formatversion:'2',origin:'*'});
+  const response=await fetch(`${WIKTIONARY_API}?${params}`);
+  if(!response.ok)throw Error('辞書へ接続できませんでした。');
+  const data=await response.json();
+  if(data.error||!data.parse?.wikitext)continue;
+  const definitions=extractJapaneseDefinitions(data.parse.wikitext);
+  if(!definitions.length)continue;
+  return {definitions,title:data.parse.title||candidate,sourceUrl:`https://ja.wiktionary.org/wiki/${encodeURIComponent(data.parse.title||candidate)}`};
+ }
+ throw Error('この語句は辞書で見つかりませんでした。基本形で入力すると見つかる場合があります。');
+}
+function buildWordDraft(word,meaning,sourceUrl,dictionaryTitle=word,correctIndex=Math.floor(Math.random()*5)){
  const distractors=shuffled(DISTRACTOR_POOL.filter(x=>x!==meaning)).slice(0,4);
  const choices=[...distractors];choices.splice(correctIndex,0,meaning);
- draft={id:`word-${Date.now()}-${Math.random().toString(36).slice(2,7)}`,category:'語句の意味',question:`「${word}」の意味として最も適切なものを選んでください。`,choices,answer:correctIndex,explanation:`「${word}」は「${meaning}」という意味です。`,origin:'ja-wiktionary',sourceUrl,sourceLabel:'日本語Wiktionary',contentLicense:'CC BY-SA 4.0',reviewed:true};
+ const explanation=word===dictionaryTitle?`「${word}」は「${meaning}」という意味です。`:`「${word}」は、辞書見出し「${dictionaryTitle}」の語義では「${meaning}」という意味です。`;
+ draft={id:`word-${Date.now()}-${Math.random().toString(36).slice(2,7)}`,category:'語句の意味',question:`「${word}」の意味として最も適切なものを選んでください。`,choices,answer:correctIndex,explanation,origin:'ja-wiktionary',sourceUrl,sourceLabel:'日本語Wiktionary',contentLicense:'CC BY-SA 4.0',dictionaryTitle,reviewed:true};
  $('preview-question').textContent=draft.question;
  $('preview-choices').replaceChildren(...choices.map(x=>{const li=document.createElement('li');li.textContent=x;return li;}));
  $('preview-answer').textContent=`正解：${String.fromCharCode(65+draft.answer)}. ${meaning}`;
  $('preview-source').href=sourceUrl;
- $('word-preview').hidden=false;$('word-status').textContent='問題案を作りました。誤答も含めて内容を確認してください。';
+ $('word-preview').hidden=false;$('word-status').textContent=word===dictionaryTitle?'問題案を作りました。誤答も含めて内容を確認してください。':`辞書見出し「${dictionaryTitle}」の意味から問題案を作りました。内容を確認してください。`;
 }
 async function lookupWordDraft(){
  const word=$('word-input').value.trim(),button=$('lookup-submit');
- if(!word){$('word-status').textContent='熟語を入力してください。';return;}
- if(!/^[一-龠々〆ヵヶ]+$/.test(word)){$('word-status').textContent='漢字で熟語を入力してください。';return;}
+ if(!word){$('word-status').textContent='語句を入力してください。';return;}
+ if(!/^[\p{Script=Han}\p{Script=Hiragana}\p{Script=Katakana}々〆ヵヶー・\s]+$/u.test(word)){$('word-status').textContent='日本語の語句を入力してください。';return;}
  button.disabled=true;button.textContent='意味を調べています…';$('word-status').textContent='日本語Wiktionaryを検索しています。';$('word-preview').hidden=true;
  try{
-  const params=new URLSearchParams({action:'parse',page:word,prop:'wikitext',format:'json',formatversion:'2',origin:'*'});
-  const response=await fetch(`${WIKTIONARY_API}?${params}`);
-  if(!response.ok)throw Error('辞書へ接続できませんでした。');
-  const data=await response.json();
-  if(data.error||!data.parse?.wikitext)throw Error('この熟語は辞書で見つかりませんでした。');
-  const definitions=extractJapaneseDefinitions(data.parse.wikitext);
-  if(!definitions.length)throw Error('日本語の意味を取得できませんでした。別の熟語を試してください。');
-  const sourceUrl=`https://ja.wiktionary.org/wiki/${encodeURIComponent(data.parse.title||word)}`;
-  buildWordDraft(word,definitions.at(-1),sourceUrl);
+  const entry=await fetchWiktionaryEntry(word);
+  buildWordDraft(word,entry.definitions.at(-1),entry.sourceUrl,entry.title);
  }catch(err){draft=null;$('word-status').textContent=`問題を作れませんでした：${err.message}`;}
  finally{button.disabled=false;button.textContent='意味を調べて問題案を作る';}
 }
-function regenerateWordDraft(){if(draft)buildWordDraft($('word-input').value.trim(),draft.choices[draft.answer],draft.sourceUrl,draft.answer);}
+function regenerateWordDraft(){if(draft)buildWordDraft($('word-input').value.trim(),draft.choices[draft.answer],draft.sourceUrl,draft.dictionaryTitle||$('word-input').value.trim(),draft.answer);}
 function addWordDraft(){
  if(!draft)return;
  try{

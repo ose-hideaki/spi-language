@@ -38,13 +38,13 @@
           <p id="notice" role="status"></p>
         </div>
         <details class="card" id="add-panel">
-          <summary>熟語から問題を追加する</summary>
+          <summary>語句から問題を追加する</summary>
           <section class="question-builder" aria-labelledby="builder-title">
-            <h2 id="builder-title">熟語を1つ入力</h2>
-            <p>日本語Wiktionaryで意味を調べ、語句の意味問題を自動で作ります。追加前に内容を確認してください。</p>
+            <h2 id="builder-title">語句を1つ入力</h2>
+            <p>熟語だけでなく、「応分な」のような語句にも対応しています。日本語Wiktionaryで意味を調べ、問題を自動で作ります。</p>
             <form id="word-form">
-              <label>出題する熟語
-                <input type="text" id="word-input" maxlength="40" required placeholder="例：折衝" autocomplete="off">
+              <label>出題する語句
+                <input type="text" id="word-input" maxlength="40" required placeholder="例：応分な" autocomplete="off">
               </label>
               <button type="submit" id="lookup-submit" class="primary">意味を調べて問題案を作る</button>
             </form>
