@@ -1048,5 +1048,205 @@
     "contentLicense": "CC BY-SA 4.0",
     "dictionaryTitle": "遁走",
     "reviewed": true
+  },
+  {
+    "id": "word-1793698768552-zah6o",
+    "category": "語句の意味",
+    "question": "「中原」の意味として最も適切なものを選んでください。",
+    "choices": [
+      "決められた役割や責任を最後まで果たすこと",
+      "失敗を恐れず、新しいことに取り組むこと",
+      "すでに決まった事柄を、改めて確認すること",
+      "周辺地域に対し、天下の中心となる地。政権争いの場。",
+      "根拠が十分でないまま推測して決めること"
+    ],
+    "answer": 3,
+    "explanation": "「中原」は「周辺地域に対し、天下の中心となる地。政権争いの場。」という意味です。",
+    "origin": "ja-wiktionary",
+    "sourceUrl": "https://ja.wiktionary.org/wiki/%E4%B8%AD%E5%8E%9F",
+    "sourceLabel": "日本語Wiktionary",
+    "contentLicense": "CC BY-SA 4.0",
+    "dictionaryTitle": "中原",
+    "reviewed": true
+  },
+  {
+    "id": "word-1793698770712-tqw12",
+    "category": "語句の意味",
+    "question": "「粉飾」の意味として最も適切なものを選んでください。",
+    "choices": [
+      "失敗を恐れず、新しいことに取り組むこと",
+      "互いに関係がなく、別々に存在していること",
+      "問題の原因をさかのぼって詳しく調べること",
+      "うわべを飾り立てて立派に見せかけること。不正などを取り繕うこと。",
+      "物事の一部分だけを取り上げて判断すること"
+    ],
+    "answer": 3,
+    "explanation": "「粉飾」は「うわべを飾り立てて立派に見せかけること。不正などを取り繕うこと。」という意味です。",
+    "origin": "ja-wiktionary",
+    "sourceUrl": "https://ja.wiktionary.org/wiki/%E7%B2%89%E9%A3%BE",
+    "sourceLabel": "日本語Wiktionary",
+    "contentLicense": "CC BY-SA 4.0",
+    "dictionaryTitle": "粉飾",
+    "reviewed": true
+  },
+  {
+    "id": "word-1793698775884-b6qa8",
+    "category": "語句の意味",
+    "question": "「斯界」の意味として最も適切なものを選んでください。",
+    "choices": [
+      "決められた役割や責任を最後まで果たすこと",
+      "失敗を恐れず、新しいことに取り組むこと",
+      "対立する意見の間を取り持ち、調整すること",
+      "この社会やこの業界やこの分野のこと。",
+      "相手の事情を考え、判断や行動を控えめにすること"
+    ],
+    "answer": 3,
+    "explanation": "「斯界」は「この社会やこの業界やこの分野のこと。」という意味です。",
+    "origin": "ja-wiktionary",
+    "sourceUrl": "https://ja.wiktionary.org/wiki/%E6%96%AF%E7%95%8C",
+    "sourceLabel": "日本語Wiktionary",
+    "contentLicense": "CC BY-SA 4.0",
+    "dictionaryTitle": "斯界",
+    "reviewed": true
+  },
+  {
+    "id": "word-1793698791264-4nzn2",
+    "category": "語句の意味",
+    "question": "「子細」の意味として最も適切なものを選んでください。",
+    "choices": [
+      "事細かであること",
+      "ある物事だけに心を奪われ、周囲が見えなくなること",
+      "物事の全体を広い視点から捉えること",
+      "意見や要求を強く主張し、相手に迫ること",
+      "表面には現れず、内側に隠れて存在すること"
+    ],
+    "answer": 0,
+    "explanation": "「子細」は「事細かであること」という意味です。",
+    "origin": "ja-wiktionary",
+    "sourceUrl": "https://ja.wiktionary.org/wiki/%E5%AD%90%E7%B4%B0",
+    "sourceLabel": "日本語Wiktionary",
+    "contentLicense": "CC BY-SA 4.0",
+    "dictionaryTitle": "子細",
+    "reviewed": true
+  },
+  {
+    "id": "word-1793698804420-rmxrl",
+    "category": "語句の意味",
+    "question": "「佳境」の意味として最も適切なものを選んでください。",
+    "choices": [
+      "最盛期や重要な局面のこと。",
+      "表面には現れず、内側に隠れて存在すること",
+      "自分の考えを曲げず、最後まで押し通すこと",
+      "事実を順序立てて、分かりやすく説明すること",
+      "決められた役割や責任を最後まで果たすこと"
+    ],
+    "answer": 0,
+    "explanation": "「佳境」は「最盛期や重要な局面のこと。」という意味です。",
+    "origin": "ja-wiktionary",
+    "sourceUrl": "https://ja.wiktionary.org/wiki/%E4%BD%B3%E5%A2%83",
+    "sourceLabel": "日本語Wiktionary",
+    "contentLicense": "CC BY-SA 4.0",
+    "dictionaryTitle": "佳境",
+    "reviewed": true
+  },
+  {
+    "id": "word-1793698809537-wu7lh",
+    "category": "語句の意味",
+    "question": "「気脈」の意味として最も適切なものを選んでください。",
+    "choices": [
+      "複数のものを比べ、共通点と相違点を調べること",
+      "物事の一部分だけを取り上げて判断すること",
+      "事実を順序立てて、分かりやすく説明すること",
+      "意思の疎通や脈絡や連絡のこと。",
+      "すでに決まった事柄を、改めて確認すること"
+    ],
+    "answer": 3,
+    "explanation": "「気脈」は「意思の疎通や脈絡や連絡のこと。」という意味です。",
+    "origin": "ja-wiktionary",
+    "sourceUrl": "https://ja.wiktionary.org/wiki/%E6%B0%97%E8%84%88",
+    "sourceLabel": "日本語Wiktionary",
+    "contentLicense": "CC BY-SA 4.0",
+    "dictionaryTitle": "気脈",
+    "reviewed": true
+  },
+  {
+    "id": "word-1793698849936-6f6u4",
+    "category": "語句の意味",
+    "question": "「回視」の意味として最も適切なものを選んでください。",
+    "choices": [
+      "決められた役割や責任を最後まで果たすこと",
+      "互いに関係がなく、別々に存在していること",
+      "過去を振り返ることや、あたりを見回すこと",
+      "表面には現れず、内側に隠れて存在すること",
+      "必要以上に遠慮し、自分の意見を控えること"
+    ],
+    "answer": 2,
+    "explanation": "「回視」は「過去を振り返ることや、あたりを見回すこと」という意味です。",
+    "origin": "ja-wiktionary",
+    "sourceUrl": "https://ja.wiktionary.org/wiki/%E5%9B%9E%E8%A6%96",
+    "sourceLabel": "日本語Wiktionary",
+    "contentLicense": "CC BY-SA 4.0",
+    "dictionaryTitle": "回視",
+    "reviewed": true
+  },
+  {
+    "id": "word-1793698853602-b5m97",
+    "category": "語句の意味",
+    "question": "「看過」の意味として最も適切なものを選んでください。",
+    "choices": [
+      "以前の状態を改め、よりよい形に変えること",
+      "見逃すことや大目に見ることのこと。",
+      "事実を順序立てて、分かりやすく説明すること",
+      "自分の考えを曲げず、最後まで押し通すこと",
+      "対立する意見の間を取り持ち、調整すること"
+    ],
+    "answer": 1,
+    "explanation": "「看過」は「見逃すことや大目に見ることのこと。」という意味です。",
+    "origin": "ja-wiktionary",
+    "sourceUrl": "https://ja.wiktionary.org/wiki/%E7%9C%8B%E9%81%8E",
+    "sourceLabel": "日本語Wiktionary",
+    "contentLicense": "CC BY-SA 4.0",
+    "dictionaryTitle": "看過",
+    "reviewed": true
+  },
+  {
+    "id": "word-1793698859237-xo6eq",
+    "category": "語句の意味",
+    "question": "「看破」の意味として最も適切なものを選んでください。",
+    "choices": [
+      "真相や裏の側面を見抜くこと。",
+      "物事の全体を広い視点から捉えること",
+      "根拠が十分でないまま推測して決めること",
+      "前例や慣習を重んじ、それに従うこと",
+      "自分の考えを曲げず、最後まで押し通すこと"
+    ],
+    "answer": 0,
+    "explanation": "「看破」は「真相や裏の側面を見抜くこと。」という意味です。",
+    "origin": "ja-wiktionary",
+    "sourceUrl": "https://ja.wiktionary.org/wiki/%E7%9C%8B%E7%A0%B4",
+    "sourceLabel": "日本語Wiktionary",
+    "contentLicense": "CC BY-SA 4.0",
+    "dictionaryTitle": "看破",
+    "reviewed": true
+  },
+  {
+    "id": "word-1793698869000-5xyn3",
+    "category": "語句の意味",
+    "question": "「打診」の意味として最も適切なものを選んでください。",
+    "choices": [
+      "状況に応じて素早く考えや行動を変えること",
+      "前例や慣習を重んじ、それに従うこと",
+      "自分の考えを曲げず、最後まで押し通すこと",
+      "相手の意向を確認するために提案などを行い、様子をうかがうこと。",
+      "ある物事だけに心を奪われ、周囲が見えなくなること"
+    ],
+    "answer": 3,
+    "explanation": "「打診」は「相手の意向を確認するために提案などを行い、様子をうかがうこと。」という意味です。",
+    "origin": "ja-wiktionary",
+    "sourceUrl": "https://ja.wiktionary.org/wiki/%E6%89%93%E8%A8%BA",
+    "sourceLabel": "日本語Wiktionary",
+    "contentLicense": "CC BY-SA 4.0",
+    "dictionaryTitle": "打診",
+    "reviewed": true
   }
 ]
