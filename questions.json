@@ -728,5 +728,25 @@
     "contentLicense": "CC BY-SA 4.0",
     "dictionaryTitle": "逡巡",
     "reviewed": true
+  },
+  {
+    "id": "word-1793698044891-pedmn",
+    "category": "語句の意味",
+    "question": "「詭弁」の意味として最も適切なものを選んでください。",
+    "choices": [
+      "自分の考えを曲げず、最後まで押し通すこと",
+      "根拠が十分でないまま推測して決めること",
+      "失敗を恐れず、新しいことに取り組むこと",
+      "間違っていることを強引に正しいと思わせるような巧みな弁論。",
+      "問題の原因をさかのぼって詳しく調べること"
+    ],
+    "answer": 3,
+    "explanation": "「詭弁」は「間違っていることを強引に正しいと思わせるような巧みな弁論。」という意味です。",
+    "origin": "ja-wiktionary",
+    "sourceUrl": "https://ja.wiktionary.org/wiki/%E8%A9%AD%E5%BC%81",
+    "sourceLabel": "日本語Wiktionary",
+    "contentLicense": "CC BY-SA 4.0",
+    "dictionaryTitle": "詭弁",
+    "reviewed": true
   }
 ]
