@@ -1,0 +1,17 @@
+.admin-heading,
+.section-heading { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+.admin-heading h1,
+.section-heading h2 { margin: 0; }
+#login-panel { max-width: 560px; margin: 40px auto; }
+#login-status,
+#submission-list-status { min-height: 1.75em; color: #5e6870; }
+.submission-list { padding-left: 24px; }
+.submission-list li { padding: 14px 0; border-bottom: 1px solid #e6eaed; }
+.submission-list li:last-child { border-bottom: 0; }
+.submission-word { display: block; margin-bottom: 8px; font-size: 19px; font-weight: 700; }
+.submission-date { margin-left: 10px; color: #77818a; font-size: 12px; font-weight: 400; }
+#submission-count { color: #77818a; font-size: 14px; }
+@media (max-width: 650px) {
+  .admin-heading { align-items: flex-start; }
+  .section-heading { align-items: flex-start; }
+}

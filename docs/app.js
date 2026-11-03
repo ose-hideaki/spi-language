@@ -42,7 +42,7 @@ try{const saved=JSON.parse(localStorage.getItem(KEY));if(saved){if(!Array.isArra
 function save(){try{localStorage.setItem(KEY,JSON.stringify(state));}catch{$('storage-status').textContent='記録を保存できませんでした。ブラウザの保存設定や容量を確認してください。';}}
 function all(){return [...window.SEED_QUESTIONS,...state.custom];}
 function practiceQuestions(){return all().filter(q=>q.category==='語句の意味');}
-function home(){clearInterval(timer);$('home').hidden=false;$('practice').hidden=true;$('result').hidden=true;const data=practiceQuestions(),ids=new Set(data.map(q=>q.id)),history=state.history.filter(h=>ids.has(h.id));$('total').textContent=data.length;$('done').textContent=history.length;$('rate').textContent=history.length?Math.round(history.filter(h=>h.correct).length/history.length*100)+'%':'—';renderPublishQueue();}
+function home(){clearInterval(timer);$('home').hidden=false;$('practice').hidden=true;$('result').hidden=true;const data=practiceQuestions(),ids=new Set(data.map(q=>q.id)),history=state.history.filter(h=>ids.has(h.id));$('total').textContent=data.length;$('done').textContent=history.length;$('rate').textContent=history.length?Math.round(history.filter(h=>h.correct).length/history.length*100)+'%':'—';if($('publish-list'))renderPublishQueue();}
 function shuffled(a){a=[...a];for(let i=a.length-1;i>0;i--){let j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
 function shuffledWrongChoices(question){
  if(question.category!=='語句の意味')return [...question.choices];
@@ -200,11 +200,11 @@ function render(){selected=null;answered=false;let q=queue[index],displayChoices
 $('submit').onclick=()=>{if(answered||selected===null)return;answered=true;const q=queue[index],correct=selected===q.answer;if(correct)sessionCorrect++;state.history.push({id:q.id,correct,at:new Date().toISOString()});save();[...$('choices').querySelectorAll('label')].forEach((el,i)=>{el.querySelector('input').disabled=true;if(i===q.answer)el.classList.add('correct');else if(i===selected)el.classList.add('wrong');});$('feedback').textContent=`${correct?'正解です。':'今回は不正解です。'} 正解：${String.fromCharCode(65+q.answer)}\n\n${q.explanation}`;if(q.sourceUrl){const p=document.createElement('p'),a=document.createElement('a');a.href=q.sourceUrl;a.target='_blank';a.rel='noopener noreferrer';a.textContent=q.sourceLabel||'出典';p.className='source-note';p.append('意味の出典：',a,q.contentLicense?`（${q.contentLicense}）`:'');$('feedback').append(p);}$('feedback').hidden=false;$('submit').hidden=true;$('next').hidden=false;$('next').textContent=index===queue.length-1?'結果を見る →':'次の問題 →';$('progress').value=index+1;};
 $('next').onclick=()=>{index++;if(index<queue.length){render();return;}clearInterval(timer);$('practice').hidden=true;$('result').hidden=false;$('score').textContent=`${sessionCorrect} / ${queue.length} 問正解`;$('duration').textContent=`正答率 ${Math.round(sessionCorrect/queue.length*100)}% ・ 解答時間 ${formatTime(Date.now()-startTime)}`;};
 $('start').onclick=()=>begin();$('review').onclick=()=>begin(true);$('again').onclick=home;$('exit').onclick=()=>{if(confirm('演習を終了してホームに戻りますか？ 回答済みの記録は保存されます。'))home();};
-$('word-form').onsubmit=e=>{e.preventDefault();lookupWordDraft();};
-$('definition-select').onchange=()=>chooseDefinition(Number($('definition-select').value),draft?.answer);
-$('regenerate-word-question').onclick=regenerateWordDraft;
-$('add-word-question').onclick=addWordDraft;
-$('queue-word-question').onclick=queueWordDraft;
-$('publish-all-questions').onclick=publishPendingQuestions;
-$('clear-publish-list').onclick=clearPublishQueue;
+if($('word-form'))$('word-form').onsubmit=e=>{e.preventDefault();lookupWordDraft();};
+if($('definition-select'))$('definition-select').onchange=()=>chooseDefinition(Number($('definition-select').value),draft?.answer);
+if($('regenerate-word-question'))$('regenerate-word-question').onclick=regenerateWordDraft;
+if($('add-word-question'))$('add-word-question').onclick=addWordDraft;
+if($('queue-word-question'))$('queue-word-question').onclick=queueWordDraft;
+if($('publish-all-questions'))$('publish-all-questions').onclick=publishPendingQuestions;
+if($('clear-publish-list'))$('clear-publish-list').onclick=clearPublishQueue;
 validate(window.SEED_QUESTIONS);home();

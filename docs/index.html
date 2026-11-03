@@ -4,8 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>SPI言語対策道場</title>
-    <link rel="stylesheet" href="style.css?v=20261103-2">
-    <link rel="stylesheet" href="publish-queue.css?v=20261103-2">
+    <link rel="stylesheet" href="style.css?v=20261103-3">
   </head>
   <body>
     <header>
@@ -29,41 +28,18 @@
           <div><span>解答</span><strong id="done">0</strong></div>
           <div><span>正答率</span><strong id="rate">—</strong></div>
         </div>
-        <details class="card" id="add-panel">
-          <summary>問題を追加</summary>
-          <section class="question-builder" aria-labelledby="builder-title">
-            <h2 id="builder-title">語句を1つ入力</h2>
-            <p>熟語だけでなく、「応分な」のような語句にも対応しています。日本語Wiktionaryで意味を調べ、問題を自動で作ります。</p>
-            <form id="word-form">
-              <label>出題する語句
-                <input type="text" id="word-input" maxlength="40" required placeholder="例：応分な" autocomplete="off">
-              </label>
-              <button type="submit" id="lookup-submit" class="primary">意味を調べて問題案を作る</button>
-            </form>
-            <div id="word-preview" class="preview-card" hidden>
-              <p class="eyebrow">PREVIEW</p>
-              <label id="definition-field">問題に使う意味
-                <select id="definition-select"></select>
-              </label>
-              <h3 id="preview-question"></h3>
-              <ol id="preview-choices" type="A"></ol>
-              <p id="preview-answer"></p>
-              <p class="source-note">意味の出典：<a id="preview-source" target="_blank" rel="noopener noreferrer">日本語Wiktionary</a>（CC BY-SA 4.0）</p>
-              <button id="add-word-question" type="button" class="primary">この問題を追加</button>
-              <button id="queue-word-question" type="button">公開待ちリストに保存</button>
-              <button id="regenerate-word-question" type="button">誤答を入れ替える</button>
+        <section class="card submission-card" aria-labelledby="submission-title">
+          <h2 id="submission-title">追加してほしい語句</h2>
+          <form id="submission-form">
+            <label for="submission-word">語句</label>
+            <div class="submission-row">
+              <input type="text" id="submission-word" maxlength="40" required placeholder="例：垂涎" autocomplete="off">
+              <button type="submit" id="submission-submit" class="primary">送信</button>
             </div>
-            <p id="word-status" role="status"></p>
-            <div class="publish-queue" aria-labelledby="publish-queue-title">
-              <h3 id="publish-queue-title">公開待ちリスト <span id="publish-count">0問</span></h3>
-              <p id="publish-empty">まだ問題は保存されていません。</p>
-              <ol id="publish-list"></ol>
-              <button id="publish-all-questions" type="button" class="primary" disabled>リストを全員向けに登録（管理者）</button>
-              <button id="clear-publish-list" type="button" disabled>リストを空にする</button>
-              <p class="source-note">このブラウザに保存されます。登録ボタンでGitHubの確認画面を1回開き、Submitするとリスト内の問題をまとめて追加できます。GitHubで登録できたことを確認してからリストを空にしてください。</p>
-            </div>
-          </section>
-        </details>
+            <input class="honeypot" type="text" id="submission-website" tabindex="-1" autocomplete="off" aria-hidden="true">
+          </form>
+          <p id="submission-status" role="status"></p>
+        </section>
       </section>
 
       <section id="practice" hidden>
@@ -104,7 +80,8 @@
         <p id="storage-status" role="status"></p>
       </footer>
     </main>
-    <script src="questions.js?v=20261103-2"></script>
-    <script src="app.js?v=20261103-2"></script>
+    <script src="questions.js?v=20261103-3"></script>
+    <script src="app.js?v=20261103-3"></script>
+    <script type="module" src="submission.js?v=20261103-3"></script>
   </body>
 </html>

@@ -119,6 +119,8 @@ label {
 select,
 input[type="file"],
 input[type="text"],
+input[type="email"],
+input[type="password"],
 textarea {
   display: block;
   width: 100%;
@@ -132,6 +134,15 @@ textarea {
 }
 
 textarea { resize: vertical; line-height: 1.7; }
+
+.submission-card h2 { margin-bottom: 12px; }
+.submission-card label { margin-bottom: 7px; }
+.submission-row { display: grid; grid-template-columns: 1fr auto; gap: 10px; }
+.submission-row input,
+.submission-row button { margin: 0; }
+.submission-row button { min-width: 100px; }
+.honeypot { position: absolute !important; left: -10000px !important; width: 1px !important; height: 1px !important; }
+#submission-status { min-height: 1.75em; margin-bottom: 0; color: #5e6870; }
 
 button {
   margin: 5px 7px 5px 0;
@@ -368,6 +379,7 @@ footer { padding: 30px 0 45px; color: #707b83; font-size: 12px; }
   .start-card h1 { margin-bottom: 26px; }
   .count-control { grid-template-columns: 1fr 125px; font-size: 17px; }
   .home-actions { grid-template-columns: 1fr; }
+  .submission-row { grid-template-columns: 1fr; }
   .home-actions button { min-height: 56px; }
   .stats strong { font-size: 22px; }
   main:has(#practice:not([hidden])) { padding: 16px 14px 0; }
