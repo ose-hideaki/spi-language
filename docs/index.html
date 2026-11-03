@@ -4,33 +4,33 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>SPI言語対策道場</title>
-    <link rel="stylesheet" href="style.css?v=20261103-1">
-    <link rel="stylesheet" href="publish-queue.css?v=20261103-1">
+    <link rel="stylesheet" href="style.css?v=20261103-2">
+    <link rel="stylesheet" href="publish-queue.css?v=20261103-2">
   </head>
   <body>
     <header>
-      <a href="./">SPI言語対策道場<span>言葉を鍛える実践トレーニング</span></a>
-      <span class="tag">ORIGINAL PRACTICE</span>
+      <a href="./">SPI言語対策道場</a>
     </header>
     <main>
       <section id="home">
-        <div class="stats">
-          <div><strong id="total">0</strong><span>収録問題</span></div>
-          <div><strong id="done">0</strong><span>累計解答数</span></div>
-          <div><strong id="rate">—</strong><span>累計正答率</span></div>
-        </div>
-        <div class="card">
-          <h2>今日の演習</h2>
-          <p>語句の意味を練習します。1問ずつ解説を確認できます。</p>
-          <label>問題数
+        <div class="start-card">
+          <h1>語句の意味</h1>
+          <label class="count-control"><span>問題数</span>
             <select id="count"><option value="5">5問</option><option value="10">10問</option><option value="99">全問</option></select>
           </label>
-          <button id="start" class="primary">演習を始める →</button>
-          <button id="review">間違えた問題を復習</button>
+          <div class="home-actions">
+            <button id="start" class="primary">始める</button>
+            <button id="review">復習する</button>
+          </div>
           <p id="notice" role="status"></p>
         </div>
+        <div class="stats">
+          <div><span>収録</span><strong id="total">0</strong></div>
+          <div><span>解答</span><strong id="done">0</strong></div>
+          <div><span>正答率</span><strong id="rate">—</strong></div>
+        </div>
         <details class="card" id="add-panel">
-          <summary>語句から問題を追加する</summary>
+          <summary>問題を追加</summary>
           <section class="question-builder" aria-labelledby="builder-title">
             <h2 id="builder-title">語句を1つ入力</h2>
             <p>熟語だけでなく、「応分な」のような語句にも対応しています。日本語Wiktionaryで意味を調べ、問題を自動で作ります。</p>
@@ -100,12 +100,11 @@
       </section>
 
       <footer>
-        <p>非公式のSPI対策教材です。試験の運営元とは関係ありません。辞書の語義や自動生成した誤答候補は、追加前に確認してください。</p>
-        <p>市販教材・実際の試験問題は転載していません。<a href="about.html">制作方針・辞書の出典</a></p>
+        <p>非公式教材 ・ <a href="about.html">出典と利用情報</a></p>
         <p id="storage-status" role="status"></p>
       </footer>
     </main>
-    <script src="questions.js?v=20261103-1"></script>
-    <script src="app.js?v=20261103-1"></script>
+    <script src="questions.js?v=20261103-2"></script>
+    <script src="app.js?v=20261103-2"></script>
   </body>
 </html>

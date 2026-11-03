@@ -10,28 +10,16 @@ body { margin: 0; background: #fff; }
 a { color: inherit; }
 
 header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 20px max(5vw, 20px);
+  padding: 22px max(5vw, 22px);
   border-bottom: 1px solid #e6eaed;
 }
 
 header a {
-  font-size: 20px;
+  font-size: 22px;
   font-weight: 750;
   text-decoration: none;
 }
 
-header a span {
-  display: block;
-  color: #77818a;
-  font-size: 11px;
-  font-weight: 400;
-  letter-spacing: .12em;
-}
-
-.tag,
 .eyebrow {
   color: #77818a;
   font-size: 12px;
@@ -39,15 +27,59 @@ header a span {
 }
 
 main {
-  max-width: 900px;
+  max-width: 760px;
   margin: auto;
-  padding: 34px 22px 0;
+  padding: 54px 22px 0;
+}
+
+.start-card {
+  padding: 8px 0 42px;
+}
+
+.start-card h1 {
+  margin: 0 0 34px;
+  font-size: clamp(34px, 7vw, 52px);
+  line-height: 1.25;
+}
+
+.count-control {
+  display: grid;
+  grid-template-columns: 1fr 150px;
+  margin: 0 0 28px;
+  align-items: center;
+  gap: 20px;
+  font-size: 18px;
+}
+
+.count-control select {
+  margin: 0;
+  padding: 14px;
+  font-size: 18px;
+}
+
+.home-actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+
+.home-actions button {
+  min-height: 60px;
+  margin: 0;
+  font-size: 19px;
+  font-weight: 700;
+}
+
+#notice {
+  min-height: 1.75em;
+  margin: 14px 0 0;
+  color: #68737c;
 }
 
 .stats {
   display: flex;
-  margin-bottom: 28px;
-  padding: 20px 0;
+  margin: 0 0 26px;
+  padding: 18px 0;
   border-top: 1px solid #e1e5e8;
   border-bottom: 1px solid #e1e5e8;
 }
@@ -59,8 +91,12 @@ main {
 }
 
 .stats div:last-child { border: 0; }
-.stats strong { display: block; font-size: 28px; }
-.stats span { color: #77818a; font-size: 12px; }
+.stats strong { display: block; font-size: 25px; }
+.stats span { color: #77818a; font-size: 13px; }
+
+#add-panel > summary {
+  font-size: 17px;
+}
 
 .card {
   margin: 24px 0;
@@ -327,9 +363,13 @@ footer { padding: 30px 0 45px; color: #707b83; font-size: 12px; }
 [hidden] { display: none !important; }
 
 @media (max-width: 650px) {
-  .tag { display: none; }
   .card { padding: 20px; }
-  .stats strong { font-size: 24px; }
+  main { padding-top: 34px; }
+  .start-card h1 { margin-bottom: 26px; }
+  .count-control { grid-template-columns: 1fr 125px; font-size: 17px; }
+  .home-actions { grid-template-columns: 1fr; }
+  .home-actions button { min-height: 56px; }
+  .stats strong { font-size: 22px; }
   main:has(#practice:not([hidden])) { padding: 16px 14px 0; }
   .practice-header { min-height: 82px; }
   .question-number {
