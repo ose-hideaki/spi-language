@@ -158,6 +158,10 @@ async function encodeQuestionBatch(questions){
  let binary='';for(let i=0;i<bytes.length;i+=8192)binary+=String.fromCharCode(...bytes.subarray(i,i+8192));
  return {start:'<!-- SPI_PUBLIC_QUESTIONS_GZIP_START -->',end:'<!-- SPI_PUBLIC_QUESTIONS_GZIP_END -->',language:'text',payload:btoa(binary)};
 }
+function buildPublishIssueBody(questions,encoded){
+ const summaries=questions.map((question,index)=>{const answer=question.choices[question.answer].replace(/\s+/g,' ');return `### ${index+1}. ${question.question}\n\n**正解：${String.fromCharCode(65+question.answer)}. ${answer}**`;}).join('\n\n');
+ return [`${questions.length}問を全員向け問題リストへ登録します。アプリで確認済みの内容です。`,'','## 登録内容','',summaries,'','<details>','<summary>自動登録データ（編集しないでください）</summary>','',encoded.start,`\`\`\`${encoded.language}`,encoded.payload,'```',encoded.end,'','</details>'].join('\n');
+}
 async function publishPendingQuestions(){
  if(!state.pending.length)return;
  const issueWindow=window.open('about:blank','_blank');if(issueWindow)issueWindow.opener=null;
@@ -165,7 +169,7 @@ async function publishPendingQuestions(){
  try{
   validate(state.pending);
   const encoded=await encodeQuestionBatch(state.pending);
-  const body=[`${state.pending.length}問を全員向け問題リストへ登録します。アプリで確認済みの内容です。`,'',encoded.start,`\`\`\`${encoded.language}`,encoded.payload,'```',encoded.end].join('\n');
+  const body=buildPublishIssueBody(state.pending,encoded);
   const params=new URLSearchParams({title:`[公開問題一括登録] ${state.pending.length}問`,body});
   const issueUrl=`${PUBLIC_QUESTION_ISSUE_URL}?${params}`;
   if(issueWindow)issueWindow.location.replace(issueUrl);else window.location.href=issueUrl;
