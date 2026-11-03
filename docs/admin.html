@@ -43,8 +43,10 @@
             <button type="submit" id="lookup-submit" class="primary">意味を調べる</button>
           </form>
           <div id="word-preview" class="preview-card" hidden>
-            <label id="definition-field" for="definition-select">問題に使う意味</label>
+            <label id="definition-field" for="definition-select">Wiktionaryの語義</label>
             <select id="definition-select"></select>
+            <label for="meaning-input">問題に使う意味（編集できます）</label>
+            <textarea id="meaning-input" rows="3" maxlength="1000"></textarea>
             <label for="reading-input">ふりがな</label>
             <input id="reading-input" type="text" maxlength="200" autocomplete="off" placeholder="例：おうぶんな">
             <h3 id="preview-question"></h3>
@@ -67,6 +69,6 @@
         </section>
       </div>
     </main>
-    <script type="module" src="admin.js?v=20261103-5"></script>
+    <script type="module" src="admin.js?v=20261103-6"></script>
   </body>
 </html>

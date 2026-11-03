@@ -54,6 +54,12 @@ function shuffledChoiceEntries(question){
  let wrongIndex=0;
  return entries.map((choice,i)=>i===question.answer?choice:wrong[wrongIndex++]);
 }
+function mergeFollowingKana(surface,following){
+ let overlap=Math.min(surface.length,following.length);
+ while(overlap>0&&!surface.endsWith(following.slice(0,overlap)))overlap--;
+ const duplicated=overlap>=2||(overlap===1&&surface.endsWith('る')&&following.startsWith('るよう'));
+ return surface+(duplicated?following.slice(overlap):following);
+}
 function appendRuby(container,text,headword,reading){
  container.replaceChildren();
  if(!headword||!reading||!text.includes(headword)){container.textContent=text;return;}
@@ -63,8 +69,9 @@ function appendRuby(container,text,headword,reading){
 }
 function cleanWikiMarkup(text){
  text=text
-  .replace(/\{\{おくりがな2\|([^{}]+)\}\}/g,(_,body)=>{const parts=body.split('|');return (parts[0]||'')+(parts[2]||'');})
-  .replace(/\{\{おくりがな3\|([^{}]+)\}\}/g,(_,body)=>{const parts=body.split('|');return (parts[0]||'')+(parts[2]||'')+(parts[4]||'');})
+  .replace(/\{\{おくりがな2\|([^{}]+)\}\}([ぁ-ゖー]*)/gu,(_,body,following)=>{const parts=body.split('|'),surface=(parts[0]||'')+(parts[2]||'');return mergeFollowingKana(surface,following);})
+  .replace(/\{\{おくりがな3\|([^{}]+)\}\}([ぁ-ゖー]*)/gu,(_,body,following)=>{const parts=body.split('|'),surface=(parts[0]||'')+(parts[2]||'')+(parts[4]||'');return mergeFollowingKana(surface,following);})
+  .replace(/\{\{おくりがな\|([^{}]+)\}\}([ぁ-ゖー]*)/gu,(_,body,following)=>{const parts=body.split('|'),surface=(parts[0]||'')+(parts[1]||'');return mergeFollowingKana(surface,following);})
   .replace(/\{\{ふりがな\|([^{}|]+)\|[^{}]+\}\}/g,'$1')
   .replace(/\{\{context\|figuratively\|[^{}]*\}\}/g,'（比喩的に）');
  const cleaned=text.replace(/<ref\b[^>]*>[\s\S]*?<\/ref>/gi,'').replace(/<[^>]+>/g,'').replace(/\{\{[^{}]*\}\}/g,'').replace(/\[\[(?:[^\]|]+\|)?([^\]]+)\]\]/g,'$1').replace(/'{2,}/g,'').replace(/\s+/g,' ').replace(/^[。、，・\s]+/,'').trim();
@@ -74,6 +81,7 @@ function cleanWikiMarkup(text){
 }
 function isUsableDefinition(definition,headword){
  if(/日本語に同じ|同じ意味|同義語|を参照|に同じ/.test(definition))return false;
+ if(/(ている){2}|るる|[、，]\s*な(?=[\p{Script=Han}])/u.test(definition))return false;
  const compact=definition.replace(/[（(][^）)]*[）)]/g,'').replace(/[\s。、，・「」『』【】]/g,'');
  return Boolean(compact)&&compact!==headword;
 }

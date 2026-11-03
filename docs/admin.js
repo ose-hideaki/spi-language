@@ -155,10 +155,18 @@ async function useSubmission(item) {
   await lookupWordDraft();
 }
 
+function mergeFollowingKana(surface, following) {
+  let overlap = Math.min(surface.length, following.length);
+  while (overlap > 0 && !surface.endsWith(following.slice(0, overlap))) overlap--;
+  const duplicated = overlap >= 2 || (overlap === 1 && surface.endsWith('る') && following.startsWith('るよう'));
+  return surface + (duplicated ? following.slice(overlap) : following);
+}
+
 function cleanWikiMarkup(text) {
   text = text
-    .replace(/\{\{おくりがな2\|([^{}]+)\}\}/g, (_, body) => { const p = body.split('|'); return (p[0] || '') + (p[2] || ''); })
-    .replace(/\{\{おくりがな3\|([^{}]+)\}\}/g, (_, body) => { const p = body.split('|'); return (p[0] || '') + (p[2] || '') + (p[4] || ''); })
+    .replace(/\{\{おくりがな2\|([^{}]+)\}\}([ぁ-ゖー]*)/gu, (_, body, following) => { const p = body.split('|'); return mergeFollowingKana((p[0] || '') + (p[2] || ''), following); })
+    .replace(/\{\{おくりがな3\|([^{}]+)\}\}([ぁ-ゖー]*)/gu, (_, body, following) => { const p = body.split('|'); return mergeFollowingKana((p[0] || '') + (p[2] || '') + (p[4] || ''), following); })
+    .replace(/\{\{おくりがな\|([^{}]+)\}\}([ぁ-ゖー]*)/gu, (_, body, following) => { const p = body.split('|'); return mergeFollowingKana((p[0] || '') + (p[1] || ''), following); })
     .replace(/\{\{ふりがな\|([^{}|]+)\|[^{}]+\}\}/g, '$1')
     .replace(/\{\{context\|figuratively\|[^{}]*\}\}/g, '（比喩的に）');
   const cleaned = text.replace(/<ref\b[^>]*>[\s\S]*?<\/ref>/gi, '').replace(/<[^>]+>/g, '').replace(/\{\{[^{}]*\}\}/g, '').replace(/\[\[(?:[^\]|]+\|)?([^\]]+)\]\]/g, '$1').replace(/'{2,}/g, '').replace(/\s+/g, ' ').replace(/^[。、，・\s]+/, '').trim();
@@ -177,6 +185,7 @@ function extractDefinitions(wikitext, headword) {
     .map(line => cleanWikiMarkup(line.slice(1)))
     .filter(definition => {
       if (/日本語に同じ|同じ意味|同義語|を参照|に同じ/.test(definition)) return false;
+      if (/(ている){2}|るる|[、，]\s*な(?=[\p{Script=Han}])/u.test(definition)) return false;
       const compact = definition.replace(/[（(][^）)]*[）)]/g, '').replace(/[\s。、，・「」『』【】]/g, '');
       return compact && compact !== headword && [...compact].length >= 4;
     });
@@ -248,7 +257,10 @@ function buildDraft(word, definition, correctIndex = Math.floor(Math.random() * 
 
 function chooseDefinition(index, correctIndex) {
   const definition = lookupEntry?.definitions[index];
-  if (definition) buildDraft($('word-input').value.trim(), definition, correctIndex);
+  if (definition) {
+    $('meaning-input').value = definition;
+    buildDraft($('word-input').value.trim(), definition, correctIndex);
+  }
 }
 
 async function lookupWordDraft() {
@@ -387,8 +399,9 @@ $('reload-submissions').onclick = loadSubmissions;
 $('word-form').onsubmit = event => { event.preventDefault(); activeSubmissionId = activeSubmissionId || null; lookupWordDraft(); };
 $('word-input').addEventListener('input', () => { if (!submissions.some(item => item.id === activeSubmissionId && item.word === $('word-input').value.trim())) activeSubmissionId = null; });
 $('definition-select').onchange = () => chooseDefinition(Number($('definition-select').value), draft?.answer);
+$('meaning-input').oninput = () => { if (draft && $('meaning-input').value.trim()) buildDraft($('word-input').value.trim(), $('meaning-input').value.trim(), draft.answer); };
 $('reading-input').oninput = () => { if (draft) draft.reading = $('reading-input').value.trim(); };
-$('regenerate-word-question').onclick = () => { if (draft) chooseDefinition(Number($('definition-select').value), draft.answer); };
+$('regenerate-word-question').onclick = () => { if (draft) buildDraft($('word-input').value.trim(), $('meaning-input').value.trim(), draft.answer); };
 $('queue-word-question').onclick = queueDraft;
 $('publish-all-questions').onclick = publishPending;
 $('publish-complete').onclick = completePublishedQuestions;
