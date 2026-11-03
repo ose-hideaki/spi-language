@@ -428,5 +428,105 @@
     "contentLicense": "CC BY-SA 4.0",
     "dictionaryTitle": "義憤",
     "reviewed": true
+  },
+  {
+    "id": "word-1793697500163-prk69",
+    "category": "語句の意味",
+    "question": "「焦眉」の意味として最も適切なものを選んでください。",
+    "choices": [
+      "すでに決まった事柄を、改めて確認すること",
+      "表面には現れず、内側に隠れて存在すること",
+      "失敗を恐れず、新しいことに取り組むこと",
+      "自分の考えを曲げず、最後まで押し通すこと",
+      "まさに差し迫って解決を要する危難。焦眉の急。"
+    ],
+    "answer": 4,
+    "explanation": "「焦眉」は「まさに差し迫って解決を要する危難。焦眉の急。」という意味です。",
+    "origin": "ja-wiktionary",
+    "sourceUrl": "https://ja.wiktionary.org/wiki/%E7%84%A6%E7%9C%89",
+    "sourceLabel": "日本語Wiktionary",
+    "contentLicense": "CC BY-SA 4.0",
+    "dictionaryTitle": "焦眉",
+    "reviewed": true
+  },
+  {
+    "id": "word-1793697517965-y52mv",
+    "category": "語句の意味",
+    "question": "「度量」の意味として最も適切なものを選んでください。",
+    "choices": [
+      "相手の事情を考え、判断や行動を控えめにすること",
+      "前例や慣習を重んじ、それに従うこと",
+      "自分の考えを曲げず、最後まで押し通すこと",
+      "問題の原因をさかのぼって詳しく調べること",
+      "他人の意見や行動などを寛大に受け入れる性質。"
+    ],
+    "answer": 4,
+    "explanation": "「度量」は「他人の意見や行動などを寛大に受け入れる性質。」という意味です。",
+    "origin": "ja-wiktionary",
+    "sourceUrl": "https://ja.wiktionary.org/wiki/%E5%BA%A6%E9%87%8F",
+    "sourceLabel": "日本語Wiktionary",
+    "contentLicense": "CC BY-SA 4.0",
+    "dictionaryTitle": "度量",
+    "reviewed": true
+  },
+  {
+    "id": "word-1793697541974-7gzhk",
+    "category": "語句の意味",
+    "question": "「跳梁」の意味として最も適切なものを選んでください。",
+    "choices": [
+      "ある物事だけに心を奪われ、周囲が見えなくなること",
+      "状況に応じて素早く考えや行動を変えること",
+      "表面には現れず、内側に隠れて存在すること",
+      "以前の状態を改め、よりよい形に変えること",
+      "特に悪者などがのさばること。"
+    ],
+    "answer": 4,
+    "explanation": "「跳梁」は「特に悪者などがのさばること。」という意味です。",
+    "origin": "ja-wiktionary",
+    "sourceUrl": "https://ja.wiktionary.org/wiki/%E8%B7%B3%E6%A2%81",
+    "sourceLabel": "日本語Wiktionary",
+    "contentLicense": "CC BY-SA 4.0",
+    "dictionaryTitle": "跳梁",
+    "reviewed": true
+  },
+  {
+    "id": "word-1793697549217-cf6ks",
+    "category": "語句の意味",
+    "question": "「履行」の意味として最も適切なものを選んでください。",
+    "choices": [
+      "複数のものを比べ、共通点と相違点を調べること",
+      "ある物事だけに心を奪われ、周囲が見えなくなること",
+      "約束したことを行うこと。",
+      "対立する意見の間を取り持ち、調整すること",
+      "相手の事情を考え、判断や行動を控えめにすること"
+    ],
+    "answer": 2,
+    "explanation": "「履行」は「約束したことを行うこと。」という意味です。",
+    "origin": "ja-wiktionary",
+    "sourceUrl": "https://ja.wiktionary.org/wiki/%E5%B1%A5%E8%A1%8C",
+    "sourceLabel": "日本語Wiktionary",
+    "contentLicense": "CC BY-SA 4.0",
+    "dictionaryTitle": "履行",
+    "reviewed": true
+  },
+  {
+    "id": "word-1793697569276-4xcqb",
+    "category": "語句の意味",
+    "question": "「出仕」の意味として最も適切なものを選んでください。",
+    "choices": [
+      "意見や要求を強く主張し、相手に迫ること",
+      "対立する意見の間を取り持ち、調整すること",
+      "根拠が十分でないまま推測して決めること",
+      "役所、特に官庁に仕えること。",
+      "失敗を恐れず、新しいことに取り組むこと"
+    ],
+    "answer": 3,
+    "explanation": "「出仕」は「役所、特に官庁に仕えること。」という意味です。",
+    "origin": "ja-wiktionary",
+    "sourceUrl": "https://ja.wiktionary.org/wiki/%E5%87%BA%E4%BB%95",
+    "sourceLabel": "日本語Wiktionary",
+    "contentLicense": "CC BY-SA 4.0",
+    "dictionaryTitle": "出仕",
+    "reviewed": true
   }
 ]
