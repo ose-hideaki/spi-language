@@ -28,7 +28,7 @@ form.addEventListener('submit', async event => {
     form.reset();
     status.textContent = `「${word}」を送信しました。`;
   } else if (error.code === '23505') {
-    status.textContent = 'その語句はすでに送信されています。';
+    status.textContent = 'その語句はすでに収録済み、または送信済みです。';
   } else {
     console.error(error);
     status.textContent = '送信できませんでした。時間をおいてもう一度お試しください。';
