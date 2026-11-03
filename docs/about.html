@@ -1,1 +1,26 @@
-<!doctype html><html lang="ja"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>制作方針 | ことばの演習室</title><link rel="stylesheet" href="style.css"><body><main><a href="./">← 演習に戻る</a><article class="card"><h1>制作方針</h1><p>本アプリは、AIで事前生成したオリジナル問題を使う非公式のSPI対策教材です。試験の運営元とは無関係です。AI生成問題は専門家による確認を受けておらず、誤りの可能性があります。</p><h2>参考元</h2><p><a href="https://github.com/shutouyusei/english_reading">shutouyusei/english_reading</a>の、AI生成教材を静的サイトで配信する構成を参考にしました。コード・画面・問題文・選択肢・解説は新規作成しています。参考元のソースコード・教材・画像・ロゴは取り込んでいません。</p><h2>教材について</h2><p>実際の試験問題や市販教材の転載は行っていません。追加問題も独立した題材で作成し、正解の一意性や既存教材との類似性は公開前に人が確認してください。本番の出題形式・難易度の再現は保証していません。</p><h2>学習データ</h2><p>解答履歴と追加問題はこのブラウザ内に保存されます。端末間の同期はなく、閲覧データを削除すると消えます。追加問題はJSON形式で書き出せます。本アプリからAIへの通信は行いません。</p></article></main></body></html>
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>制作方針 | ことばの演習室</title>
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <main>
+      <a href="./">← 演習に戻る</a>
+      <article class="card">
+        <h1>制作方針</h1>
+        <p>本アプリは、オリジナル問題を使う非公式のSPI対策教材です。試験の運営元とは無関係です。問題の正確性や本番との一致は保証していません。</p>
+        <h2>熟語の意味</h2>
+        <p>フォームに入力した熟語は、<a href="https://ja.wiktionary.org/">日本語Wiktionary</a>の公開APIで検索します。取得した語義と、それを含む追加問題は<a href="https://creativecommons.org/licenses/by-sa/4.0/deed.ja">CC BY-SA 4.0</a>に従って利用し、各問題にも出典ページへのリンクを表示します。複数の語義がある場合は最後の語義を問題に使用するため、追加前に内容を確認してください。</p>
+        <h2>参考元</h2>
+        <p><a href="https://github.com/shutouyusei/english_reading">shutouyusei/english_reading</a>の、教材を静的サイトで配信する構成を参考にしました。コード・画面・初期問題・選択肢・解説は新規作成しています。参考元のソースコード・教材・画像・ロゴは取り込んでいません。</p>
+        <h2>教材について</h2>
+        <p>実際の試験問題や市販教材の転載は行っていません。正解の一意性や既存教材との類似性は公開前に人が確認してください。</p>
+        <h2>学習データ</h2>
+        <p>解答履歴と追加問題はこのブラウザ内に保存されます。端末間の同期はなく、閲覧データを削除すると消えます。熟語を検索するときだけ、日本語Wiktionaryへ入力語を送信します。</p>
+      </article>
+    </main>
+  </body>
+</html>
