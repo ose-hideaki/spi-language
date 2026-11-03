@@ -1,0 +1,29 @@
+.publish-queue {
+  border-top: 1px solid #d4dbd2;
+  margin-top: 28px;
+  padding-top: 24px;
+}
+
+.publish-queue h3 {
+  display: flex;
+  justify-content: space-between;
+  gap: 15px;
+}
+
+.publish-queue h3 span {
+  color: #5a756a;
+  font-size: 14px;
+}
+
+.publish-queue ol {
+  padding-left: 28px;
+}
+
+.publish-queue li {
+  padding: 9px 0;
+}
+
+.publish-queue li button {
+  margin-left: 10px;
+  padding: 5px 10px;
+}

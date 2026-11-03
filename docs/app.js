@@ -25,7 +25,7 @@ const DISTRACTOR_POOL=[
  '以前の状態を改め、よりよい形に変えること',
  'すでに決まった事柄を、改めて確認すること'
 ];
-let state={history:[],custom:[]},queue=[],index=0,selected=null,answered=false,startTime=0,timer=null,sessionCorrect=0,draft=null;
+let state={history:[],custom:[],pending:[]},queue=[],index=0,selected=null,answered=false,startTime=0,timer=null,sessionCorrect=0,draft=null;
 function validate(data){
  if(!Array.isArray(data)||!data.length||data.length>500)throw Error('1〜500問の配列にしてください。');
  const ids=new Set();
@@ -38,10 +38,10 @@ function validate(data){
  }
  return data;
 }
-try{const saved=JSON.parse(localStorage.getItem(KEY));if(saved){if(Array.isArray(saved.custom)&&saved.custom.length)validate(saved.custom);if(!Array.isArray(saved.custom)||!Array.isArray(saved.history)||!saved.history.every(h=>h&&typeof h.id==='string'&&typeof h.correct==='boolean'))throw Error();state=saved;}}catch{ $('storage-status').textContent='保存データを読み込めませんでした。このセッションで演習できます。';}
+try{const saved=JSON.parse(localStorage.getItem(KEY));if(saved){if(!Array.isArray(saved.pending))saved.pending=[];if(Array.isArray(saved.custom)&&saved.custom.length)validate(saved.custom);if(saved.pending.length)validate(saved.pending);if(!Array.isArray(saved.custom)||!Array.isArray(saved.history)||!saved.history.every(h=>h&&typeof h.id==='string'&&typeof h.correct==='boolean'))throw Error();state=saved;}}catch{ $('storage-status').textContent='保存データを読み込めませんでした。このセッションで演習できます。';}
 function save(){try{localStorage.setItem(KEY,JSON.stringify(state));}catch{$('storage-status').textContent='記録を保存できませんでした。ブラウザの保存設定や容量を確認してください。';}}
 function all(){return [...window.SEED_QUESTIONS,...state.custom];}
-function home(){clearInterval(timer);$('home').hidden=false;$('practice').hidden=true;$('result').hidden=true;const data=all();$('total').textContent=data.length;$('done').textContent=state.history.length;$('rate').textContent=state.history.length?Math.round(state.history.filter(h=>h.correct).length/state.history.length*100)+'%':'—';const current=$('category').value;$('category').replaceChildren(new Option('すべての分野','all'),...Array.from(new Set(data.map(q=>q.category))).map(c=>new Option(c,c)));if([...$('category').options].some(o=>o.value===current))$('category').value=current;}
+function home(){clearInterval(timer);$('home').hidden=false;$('practice').hidden=true;$('result').hidden=true;const data=all();$('total').textContent=data.length;$('done').textContent=state.history.length;$('rate').textContent=state.history.length?Math.round(state.history.filter(h=>h.correct).length/state.history.length*100)+'%':'—';const current=$('category').value;$('category').replaceChildren(new Option('すべての分野','all'),...Array.from(new Set(data.map(q=>q.category))).map(c=>new Option(c,c)));if([...$('category').options].some(o=>o.value===current))$('category').value=current;renderPublishQueue();}
 function shuffled(a){a=[...a];for(let i=a.length-1;i>0;i--){let j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
 function shuffledWrongChoices(question){
  if(question.category!=='語句の意味')return [...question.choices];
@@ -122,16 +122,49 @@ function addWordDraft(){
   $('word-status').textContent='1問を追加しました。「語句の意味」の演習で出題されます。';
  }catch(err){$('word-status').textContent='追加できませんでした：'+err.message;}
 }
-function publishWordDraft(){
+function queueWordDraft(){
  if(!draft)return;
  try{
   validate([draft]);
-  const body=['この問題を全員向け問題リストへ登録します。内容を確認してSubmitしてください。','','<!-- SPI_PUBLIC_QUESTION_START -->','```json',JSON.stringify(draft,null,2),'```','<!-- SPI_PUBLIC_QUESTION_END -->'].join('\n');
-  const title=`[公開問題登録] ${draft.question.slice(0,80)}`;
-  const params=new URLSearchParams({title,body});
-  window.open(`${PUBLIC_QUESTION_ISSUE_URL}?${params}`,'_blank','noopener,noreferrer');
-  $('word-status').textContent='GitHubの管理者用確認画面を開きました。内容を確認してSubmitしてください。';
- }catch(err){$('word-status').textContent='公開登録を開始できませんでした：'+err.message;}
+  if(state.pending.some(q=>q.question===draft.question))throw Error('同じ問題が公開待ちリストにあります。');
+  if(state.pending.length>=20)throw Error('一度に登録できるのは20問までです。先に現在のリストを登録してください。');
+  state.pending.push(draft);save();
+  $('word-form').reset();$('word-preview').hidden=true;draft=null;renderPublishQueue();
+  $('word-status').textContent='公開待ちリストに1問保存しました。続けて問題を作成できます。';
+ }catch(err){$('word-status').textContent='リストへ保存できませんでした：'+err.message;}
+}
+function renderPublishQueue(){
+ $('publish-count').textContent=`${state.pending.length}問`;
+ $('publish-empty').hidden=state.pending.length>0;
+ $('publish-all-questions').disabled=state.pending.length===0;
+ $('clear-publish-list').disabled=state.pending.length===0;
+ $('publish-list').replaceChildren(...state.pending.map((q,i)=>{const li=document.createElement('li'),text=document.createElement('span'),button=document.createElement('button');text.textContent=q.question;button.type='button';button.textContent='削除';button.onclick=()=>{state.pending.splice(i,1);save();renderPublishQueue();};li.append(text,button);return li;}));
+}
+async function encodeQuestionBatch(questions){
+ const json=JSON.stringify(questions);
+ if(typeof CompressionStream==='undefined')return {start:'<!-- SPI_PUBLIC_QUESTION_START -->',end:'<!-- SPI_PUBLIC_QUESTION_END -->',language:'json',payload:JSON.stringify(questions,null,2)};
+ const stream=new Blob([new TextEncoder().encode(json)]).stream().pipeThrough(new CompressionStream('gzip'));
+ const bytes=new Uint8Array(await new Response(stream).arrayBuffer());
+ let binary='';for(let i=0;i<bytes.length;i+=8192)binary+=String.fromCharCode(...bytes.subarray(i,i+8192));
+ return {start:'<!-- SPI_PUBLIC_QUESTIONS_GZIP_START -->',end:'<!-- SPI_PUBLIC_QUESTIONS_GZIP_END -->',language:'text',payload:btoa(binary)};
+}
+async function publishPendingQuestions(){
+ if(!state.pending.length)return;
+ const issueWindow=window.open('about:blank','_blank');if(issueWindow)issueWindow.opener=null;
+ const button=$('publish-all-questions');button.disabled=true;button.textContent='登録データを準備しています…';
+ try{
+  validate(state.pending);
+  const encoded=await encodeQuestionBatch(state.pending);
+  const body=[`${state.pending.length}問を全員向け問題リストへ登録します。アプリで確認済みの内容です。`,'',encoded.start,`\`\`\`${encoded.language}`,encoded.payload,'```',encoded.end].join('\n');
+  const params=new URLSearchParams({title:`[公開問題一括登録] ${state.pending.length}問`,body});
+  const issueUrl=`${PUBLIC_QUESTION_ISSUE_URL}?${params}`;
+  if(issueWindow)issueWindow.location.replace(issueUrl);else window.location.href=issueUrl;
+  $('word-status').textContent='GitHubの確認画面を開きました。Submit後、登録完了を確認してからリストを空にしてください。';
+ }catch(err){if(issueWindow)issueWindow.close();$('word-status').textContent='一括登録を開始できませんでした：'+err.message;}
+ finally{button.disabled=state.pending.length===0;button.textContent='リストを全員向けに登録（管理者）';}
+}
+function clearPublishQueue(){
+ if(state.pending.length&&confirm('公開待ちリストを空にしますか？ このブラウザからは元に戻せません。')){state.pending=[];save();renderPublishQueue();$('word-status').textContent='公開待ちリストを空にしました。';}
 }
 function begin(review=false){let data=all();if(review){const latest=new Map(state.history.map(h=>[h.id,h.correct]));data=data.filter(q=>latest.get(q.id)===false);}else if($('category').value!=='all'){data=data.filter(q=>q.category===$('category').value);}if(!data.length){$('notice').textContent=review?'復習する問題はありません。最新の解答が不正解の問題がここに入ります。':'問題がありません。';return;}queue=shuffled(data).slice(0,Number($('count').value));index=0;sessionCorrect=0;startTime=Date.now();$('home').hidden=true;$('result').hidden=true;$('practice').hidden=false;const tick=()=>{$('timer').textContent=formatTime(Date.now()-startTime);};tick();timer=setInterval(tick,1000);render();}
 function formatTime(ms){let s=Math.floor(ms/1000);return Math.floor(s/60)+':'+String(s%60).padStart(2,'0');}
@@ -142,5 +175,7 @@ $('start').onclick=()=>begin();$('review').onclick=()=>begin(true);$('again').on
 $('word-form').onsubmit=e=>{e.preventDefault();lookupWordDraft();};
 $('regenerate-word-question').onclick=regenerateWordDraft;
 $('add-word-question').onclick=addWordDraft;
-$('publish-word-question').onclick=publishWordDraft;
+$('queue-word-question').onclick=queueWordDraft;
+$('publish-all-questions').onclick=publishPendingQuestions;
+$('clear-publish-list').onclick=clearPublishQueue;
 validate(window.SEED_QUESTIONS);home();

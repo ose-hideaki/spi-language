@@ -14,24 +14,27 @@ concurrency:
 
 jobs:
   publish:
-    if: github.actor == 'ose-hideaki' && startsWith(github.event.issue.title, '[公開問題登録]')
+    if: github.actor == 'ose-hideaki' && (startsWith(github.event.issue.title, '[公開問題登録]') || startsWith(github.event.issue.title, '[公開問題一括登録]'))
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Add and validate question
+      - name: Add and validate questions
+        id: add
         run: |
           python3 scripts/publish_issue_question.py "$GITHUB_EVENT_PATH"
           python3 scripts/validate_questions.py questions.json --build
-      - name: Commit public question
+          if git diff --quiet; then echo "changed=false" >> "$GITHUB_OUTPUT"; else echo "changed=true" >> "$GITHUB_OUTPUT"; fi
+      - name: Commit public questions
+        if: steps.add.outputs.changed == 'true'
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add questions.json docs/questions.js
-          git commit -m "Add public vocabulary question from issue #${{ github.event.issue.number }}"
+          git commit -m "Add public vocabulary questions from issue #${{ github.event.issue.number }}"
           git push
       - name: Close completed request
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          gh issue comment "${{ github.event.issue.number }}" --body "公開問題リストへ追加しました。GitHub Pagesへの反映をお待ちください。"
+          gh issue comment "${{ github.event.issue.number }}" --body "公開問題リストの一括登録を処理しました。GitHub Pagesへの反映をお待ちください。"
           gh issue close "${{ github.event.issue.number }}"
