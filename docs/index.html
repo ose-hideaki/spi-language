@@ -67,17 +67,28 @@
       </section>
 
       <section id="practice" hidden>
-        <div class="toolbar"><button id="exit">← ホーム</button><span id="position"></span><span id="timer">0:00</span></div>
-        <progress id="progress" max="1" value="0"></progress>
-        <article class="card">
+        <div class="practice-header">
+          <button id="exit" class="back-button">← ホーム</button>
+          <div class="session-status">
+            <div class="question-number"><span id="position"></span><small>設問</small></div>
+            <div class="elapsed-time"><small>経過時間</small><span id="timer">0:00</span></div>
+          </div>
+        </div>
+        <article class="practice-card">
           <p class="eyebrow" id="kind"></p>
           <h2 id="question"></h2>
           <p id="passage" class="passage" hidden></p>
           <fieldset id="choices"><legend class="sr">回答を一つ選択</legend></fieldset>
-          <button id="submit" class="primary" disabled>回答する</button>
           <div id="feedback" role="status" hidden></div>
-          <button id="next" class="primary" hidden>次の問題 →</button>
         </article>
+        <div class="practice-progress">
+          <span>進み具合</span>
+          <progress id="progress" max="1" value="0"></progress>
+        </div>
+        <div class="practice-actions">
+          <button id="submit" class="primary" disabled>回答する →</button>
+          <button id="next" class="primary" hidden>次の問題 →</button>
+        </div>
       </section>
 
       <section id="result" class="card" hidden>
