@@ -50,7 +50,11 @@ function shuffledWrongChoices(question){
  return question.choices.map((choice,i)=>i===question.answer?choice:wrong[wrongIndex++]);
 }
 function cleanWikiMarkup(text){
- return text.replace(/<ref\b[^>]*>[\s\S]*?<\/ref>/gi,'').replace(/<[^>]+>/g,'').replace(/\{\{[^{}]*\}\}/g,'').replace(/\[\[(?:[^\]|]+\|)?([^\]]+)\]\]/g,'$1').replace(/'{2,}/g,'').replace(/\s+/g,' ').trim();
+ text=text.replace(/\{\{おくりがな3\|([^{}]+)\}\}/g,(_,body)=>{const parts=body.split('|');return (parts[0]||'')+(parts[2]||'')+(parts[3]||'')+(parts[5]||'');});
+ const cleaned=text.replace(/<ref\b[^>]*>[\s\S]*?<\/ref>/gi,'').replace(/<[^>]+>/g,'').replace(/\{\{[^{}]*\}\}/g,'').replace(/\[\[(?:[^\]|]+\|)?([^\]]+)\]\]/g,'$1').replace(/'{2,}/g,'').replace(/\s+/g,' ').replace(/^[。、，・\s]+/,'').trim();
+ const parts=cleaned.split('。').map(part=>part.trim()).filter(Boolean);
+ if(parts.length>1&&parts.every(part=>[...part].length<=10))return parts.join('や')+'のこと。';
+ return cleaned;
 }
 function isUsableDefinition(definition,headword){
  if(/日本語に同じ|同じ意味|同義語|を参照|に同じ/.test(definition))return false;
